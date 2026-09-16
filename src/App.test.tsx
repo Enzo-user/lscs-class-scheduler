@@ -118,6 +118,7 @@ describe('App', () => {
     expect(summaryItems()[0]).toHaveTextContent('CCPROG3 S12')
     expect(summaryItems()[0]).not.toHaveTextContent('CCPROG3 S11')
     expect(schedulePanel()).toHaveTextContent('1 course · 3 units')
+    expect(screen.getByText('Switched CCPROG3 S12')).toBeInTheDocument()
   })
 
   it('marks a clashing section as disabled with the reason', async () => {

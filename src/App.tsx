@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { CourseFilters } from './components/courses/CourseFilters'
 import { CourseList } from './components/courses/CourseList'
 import { CourseListSkeleton } from './components/courses/CourseListSkeleton'
@@ -57,15 +57,24 @@ export function App() {
   const entries = useSelectedSections(data)
   const { toast, showToast } = useToast()
 
+  // handleAdd only needs `selected` to word the toast ("Added" vs "Switched").
+  // Reading it through a ref keeps the callback's identity stable across
+  // selection changes; otherwise every memoised SectionItem would re-render
+  // on each add or remove just because it received a new onAdd.
+  const selectedRef = useRef(selected)
+  useEffect(() => {
+    selectedRef.current = selected
+  }, [selected])
+
   const handleAdd = useCallback(
     (courseId: string, sectionId: string) => {
       const course = data.find((c) => c.id === courseId)
       const section = course?.sections.find((s) => s.id === sectionId)
-      const replacing = courseId in selected
+      const replacing = courseId in selectedRef.current
       addSection(courseId, sectionId)
       showToast(`${replacing ? 'Switched' : 'Added'} ${course?.code} ${section?.section}`)
     },
-    [data, selected, addSection, showToast],
+    [data, addSection, showToast],
   )
   const handleRemove = useCallback(
     (courseId: string) => {

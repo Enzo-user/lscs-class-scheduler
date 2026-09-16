@@ -62,7 +62,7 @@ export function resolveSelectedSections(
 /** Height of one CSS grid row in the timetable, in minutes. */
 export const TIMETABLE_STEP_MINUTES = 15
 
-/** Default visible window; classes run 07:30–21:00 so this leaves a little margin. */
+/** Default visible window; classes run 07:30–19:30 so this leaves a margin either side. */
 export const DEFAULT_TIMETABLE_RANGE = { startTime: '07:00', endTime: '21:30' }
 
 export interface TimetableBlock {
