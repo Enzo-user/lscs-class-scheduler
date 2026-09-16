@@ -63,7 +63,7 @@ export const SectionItem = memo(function SectionItem({
         </p>
         <p className="text-gray-700">
           {formatSchedule(section.schedule)}
-          <span className="text-gray-500"> · {section.room}</span>
+          <span className="text-gray-600"> · {section.room}</span>
         </p>
         {blocked && (
           <p id={reasonId} className="mt-1 text-xs font-medium text-amber-800">

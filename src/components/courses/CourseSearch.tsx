@@ -26,13 +26,20 @@ export function CourseSearch({ value, onChange, resultCount, totalCount }: Cours
           onChange={(event) => onChange(event.target.value)}
           placeholder="Code, title, section or instructor"
           autoComplete="off"
-          className="min-h-10 w-full rounded-md border border-gray-300 bg-white px-3 pr-16 text-sm placeholder:text-gray-400 focus:border-brand focus:outline-2 focus:outline-offset-1 focus:outline-brand [&::-webkit-search-cancel-button]:appearance-none"
+          className={
+            'min-h-10 w-full rounded-md border border-gray-300 bg-white px-3 pr-16 text-sm placeholder:text-gray-500 ' +
+            'focus:border-brand focus:outline-2 focus:outline-offset-1 focus:outline-brand ' +
+            '[&::-webkit-search-cancel-button]:appearance-none'
+          }
         />
         {value && (
           <button
             type="button"
             onClick={() => onChange('')}
-            className="absolute inset-y-1 right-1 rounded px-2 text-xs font-medium text-gray-600 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-brand"
+            className={
+              'absolute inset-y-1 right-1 rounded px-2 text-xs font-medium text-gray-600 hover:bg-gray-100 ' +
+              'focus-visible:outline-2 focus-visible:outline-brand'
+            }
           >
             Clear
           </button>
