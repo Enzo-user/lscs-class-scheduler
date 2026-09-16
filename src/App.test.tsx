@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { App } from './App'
 import { ApiError, getCourses } from './api/coursesApi'
 import { ScheduleProvider } from './state/ScheduleProvider'
+import { SCHEDULE_STORAGE_KEY } from './state/scheduleStorage'
 import { makeCourse, makeSection, slot } from './test/fixtures'
 
 vi.mock('./api/coursesApi', async (importOriginal) => ({
@@ -95,7 +96,11 @@ describe('App', () => {
     await loadCatalogue()
     expect(within(schedulePanel()).getByText('No sections yet')).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Add CCPROG3 S11' }))
+    const addButton = screen.getByRole('button', { name: 'Add CCPROG3 S11' })
+    await user.click(addButton)
+    // The same element now offers Remove, so keyboard focus is not lost.
+    expect(addButton).toHaveFocus()
+    expect(addButton).toHaveAccessibleName('Remove CCPROG3 S11')
 
     const panel = schedulePanel()
     expect(summaryItems()).toHaveLength(1)
@@ -110,6 +115,8 @@ describe('App', () => {
     await user.click(within(panel).getByRole('button', { name: 'Remove CCPROG3 S11' }))
     expect(within(panel).getByText('No sections yet')).toBeInTheDocument()
     expect(screen.queryByText('9:15–10:45 AM')).not.toBeInTheDocument()
+    // The Remove button is gone, so focus lands on the list heading instead of <body>.
+    expect(within(panel).getByRole('heading', { name: 'Selected sections' })).toHaveFocus()
   })
 
   it('switching to another section of the same course replaces the first', async () => {
@@ -149,10 +156,23 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: 'Clear all' }))
     await user.click(screen.getByRole('button', { name: 'Cancel' }))
     expect(summaryItems()[0]).toHaveTextContent('GEETHIC S11')
+    expect(screen.getByRole('button', { name: 'Clear all' })).toHaveFocus()
 
     await user.click(screen.getByRole('button', { name: 'Clear all' }))
     await user.click(screen.getByRole('button', { name: 'Yes, clear all' }))
     expect(within(schedulePanel()).getByText('No sections yet')).toBeInTheDocument()
+    expect(within(schedulePanel()).getByRole('heading', { name: 'Selected sections' })).toHaveFocus()
+  })
+
+  it('flags a restored selection that clashes with another entry', async () => {
+    // Only reachable through stale storage: the UI blocks conflicting adds.
+    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify({ CCPROG3: 'CCPROG3-S11', CSARCH1: 'CSARCH1-S11' }))
+    renderApp()
+    await loadCatalogue()
+
+    expect(summaryItems()).toHaveLength(2)
+    expect(summaryItems()[0]).toHaveTextContent('Conflicts with CSARCH1 S11')
+    expect(summaryItems()[1]).toHaveTextContent('Conflicts with CCPROG3 S11')
   })
 
   it('collapses and re-expands a course from its header', async () => {

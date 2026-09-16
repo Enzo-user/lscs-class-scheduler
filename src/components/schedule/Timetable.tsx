@@ -25,7 +25,7 @@ export function Timetable({ entries }: TimetableProps) {
         {formatTime(TIMETABLE_RANGE.endTime)}, Monday to Saturday.
         {entries.length === 0
           ? ' No classes scheduled.'
-          : ` ${layout.blocks.length} class meetings are shown; the list above has the details.`}
+          : ` ${layout.blocks.length} class meetings are shown; the Selected sections list has the details.`}
       </p>
 
       {/* The grid keeps a minimum width so blocks stay readable on phones; it scrolls sideways inside this box. */}

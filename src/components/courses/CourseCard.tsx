@@ -1,6 +1,6 @@
 import { memo, useId, useState } from 'react'
 import { pluralize } from '../../lib/pluralize'
-import { findConflicts, type SelectedSection } from '../../lib/schedule'
+import { describeConflicts, type SelectedSection } from '../../lib/schedule'
 import type { Course, Section } from '../../types/course'
 import { Badge } from '../ui/Badge'
 import { SectionItem, type SectionState } from './SectionItem'
@@ -101,9 +101,3 @@ function sectionState(section: Section, selectedSectionId: string | undefined): 
   return selectedSectionId === section.id ? 'selected' : 'switch'
 }
 
-/** "CCPROG3 S11, CSARCH1 S12" for the selections that clash with `candidate`. */
-function describeConflicts(candidate: SelectedSection, entries: SelectedSection[]): string {
-  return findConflicts(candidate, entries)
-    .map((entry) => `${entry.course.code} ${entry.section.section}`)
-    .join(', ')
-}

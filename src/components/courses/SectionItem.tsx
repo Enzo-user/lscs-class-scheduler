@@ -1,7 +1,7 @@
 import { memo, useId } from 'react'
 import { formatSchedule } from '../../lib/time'
 import type { Section } from '../../types/course'
-import { Button } from '../ui/Button'
+import { Button, type ButtonVariant } from '../ui/Button'
 
 /**
  * How this section relates to the schedule:
@@ -10,6 +10,13 @@ import { Button } from '../ui/Button'
  * - `selected`: this section is on the schedule
  */
 export type SectionState = 'add' | 'switch' | 'selected'
+
+/** What the row's one action button says and looks like in each state. */
+const ACTIONS: Record<SectionState, { label: string; variant: ButtonVariant }> = {
+  add: { label: 'Add', variant: 'primary' },
+  switch: { label: 'Switch to this section', variant: 'secondary' },
+  selected: { label: 'Remove', variant: 'ghost' },
+}
 
 export interface SectionItemProps {
   courseId: string
@@ -41,6 +48,7 @@ export const SectionItem = memo(function SectionItem({
   const selected = state === 'selected'
   const blocked = conflictsWith !== '' && !selected
   const name = `${courseCode} ${section.section}`
+  const action = ACTIONS[state]
 
   return (
     <li
@@ -66,30 +74,26 @@ export const SectionItem = memo(function SectionItem({
       </div>
 
       <div className="flex shrink-0 items-center gap-2">
-        {selected ? (
-          <>
-            <span className="text-sm font-medium text-brand-dark">
-              <span aria-hidden="true">✓ </span>Added
-            </span>
-            <Button size="sm" variant="ghost" onClick={() => onRemove(courseId)}>
-              Remove{' '}
-              <span className="sr-only">{name}</span>
-            </Button>
-          </>
-        ) : (
-          <Button
-            size="sm"
-            variant={state === 'switch' ? 'secondary' : 'primary'}
-            aria-disabled={blocked || undefined}
-            aria-describedby={blocked ? reasonId : undefined}
-            onClick={() => {
-              if (!blocked) onAdd(courseId, section.id)
-            }}
-          >
-            {state === 'switch' ? 'Switch to this section' : 'Add'}{' '}
-            <span className="sr-only">{name}</span>
-          </Button>
+        {selected && (
+          <span className="text-sm font-medium text-brand-dark">
+            <span aria-hidden="true">✓ </span>Added
+          </span>
         )}
+        {/* One button that changes label and action, instead of swapping Add for
+            Remove: the element survives the state change, so keyboard focus stays
+            on it and the toast announces what happened. */}
+        <Button
+          size="sm"
+          variant={action.variant}
+          aria-disabled={blocked || undefined}
+          aria-describedby={blocked ? reasonId : undefined}
+          onClick={() => {
+            if (selected) onRemove(courseId)
+            else if (!blocked) onAdd(courseId, section.id)
+          }}
+        >
+          {action.label} <span className="sr-only">{name}</span>
+        </Button>
       </div>
     </li>
   )

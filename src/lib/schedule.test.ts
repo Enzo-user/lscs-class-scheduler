@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { makeCourse, makeSection, slot } from '../test/fixtures'
 import {
   buildTimetable,
+  describeConflicts,
   describeSchedule,
   findConflicts,
   resolveSelectedSections,
@@ -69,6 +70,12 @@ describe('findConflicts', () => {
 
   it('returns nothing when the schedule is empty', () => {
     expect(findConflicts({ course: prog, section: progS11 }, [])).toEqual([])
+  })
+
+  it('describes the clashing selections as "CODE SECTION" pairs', () => {
+    const selected = [{ course: dstru, section: dstruS11 }]
+    expect(describeConflicts({ course: prog, section: progS11 }, selected)).toBe('CCDSTRU S11')
+    expect(describeConflicts({ course: prog, section: progS11 }, [])).toBe('')
   })
 })
 

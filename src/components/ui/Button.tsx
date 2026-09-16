@@ -1,10 +1,11 @@
-import type { ButtonHTMLAttributes } from 'react'
+import type { ComponentProps } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'danger'
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
 type Size = 'sm' | 'md'
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: Variant
+/** Every native <button> prop, including `ref` (a plain prop in React 19). */
+export interface ButtonProps extends ComponentProps<'button'> {
+  variant?: ButtonVariant
   size?: Size
 }
 
@@ -13,7 +14,7 @@ const BASE =
   'transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ' +
   'disabled:cursor-not-allowed disabled:opacity-50 aria-disabled:cursor-not-allowed aria-disabled:opacity-50'
 
-const VARIANTS: Record<Variant, string> = {
+const VARIANTS: Record<ButtonVariant, string> = {
   primary: 'bg-brand text-white hover:bg-brand-dark aria-disabled:hover:bg-brand',
   secondary: 'border border-gray-300 bg-white text-gray-800 hover:bg-gray-50',
   ghost: 'text-gray-700 hover:bg-gray-100',

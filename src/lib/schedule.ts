@@ -37,6 +37,13 @@ export function findConflicts(
   )
 }
 
+/** "CCPROG3 S11, CSARCH1 S12" for the selections that clash with `candidate`; empty when none. */
+export function describeConflicts(candidate: SelectedSection, selected: SelectedSection[]): string {
+  return findConflicts(candidate, selected)
+    .map((entry) => `${entry.course.code} ${entry.section.section}`)
+    .join(', ')
+}
+
 /** Sum of the units of the given courses. */
 export function totalUnits(courses: Course[]): number {
   return courses.reduce((sum, course) => sum + course.units, 0)
