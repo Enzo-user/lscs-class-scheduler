@@ -11,7 +11,10 @@ export function TimetableBlock({ block }: TimetableBlockProps) {
   const { course, section, slot } = block
   return (
     <div
-      className={`z-10 m-px flex min-w-0 flex-col overflow-hidden rounded border-l-4 px-1.5 py-1 text-[11px] leading-tight ${courseColorClasses(course.id)}`}
+      className={
+        'z-10 m-px flex min-w-0 flex-col overflow-hidden rounded border-l-4 px-1.5 py-1 text-[11px] leading-tight ' +
+        courseColorClasses(course.id)
+      }
       style={{
         // +1 skips the day-header row, which is grid row 1.
         gridRow: `${block.startRow + 1} / ${block.endRow + 1}`,

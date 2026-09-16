@@ -28,7 +28,8 @@ export function Timetable({ entries }: TimetableProps) {
           : ` ${layout.blocks.length} class meetings are shown; the Selected sections list has the details.`}
       </p>
 
-      {/* The grid keeps a minimum width so blocks stay readable on phones; it scrolls sideways inside this box. */}
+      {/* The grid keeps a minimum width so blocks stay readable on phones; it scrolls sideways
+          inside this box, with the time gutter stuck to the left edge so the hours stay visible. */}
       <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
         <div
           aria-hidden="true"
@@ -48,10 +49,14 @@ export function Timetable({ entries }: TimetableProps) {
             </div>
           ))}
 
+          <div
+            className="sticky left-0 z-20 bg-white"
+            style={{ gridRow: `1 / ${layout.rowCount + 2}`, gridColumn: 1 }}
+          />
           {layout.hourLabels.map(({ row, label }) => (
             <div key={row} className="contents">
               <div
-                className="-translate-y-1/2 pr-2 text-right text-[11px] whitespace-nowrap text-gray-500"
+                className="sticky left-0 z-20 -translate-y-1/2 pr-2 text-right text-[11px] whitespace-nowrap text-gray-500"
                 style={{ gridRow: row + 1, gridColumn: 1 }}
               >
                 {label}
