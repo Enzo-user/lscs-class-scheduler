@@ -145,7 +145,10 @@ export function App() {
           ) : (
             <div className="mt-3 flex flex-col gap-6">
               <ScheduleSummary entries={entries} onRemove={handleRemove} onClear={handleClear} />
-              <div>
+              {/* On desktop the timetable is what you look at while the list is what you act
+                  on, so it goes first; on a phone the list stays first because the grid
+                  scrolls sideways and would push everything below the fold. */}
+              <div className="lg:order-first">
                 <h3 className="mb-2 text-sm font-semibold text-gray-800">Weekly timetable</h3>
                 <Timetable entries={entries} />
               </div>
