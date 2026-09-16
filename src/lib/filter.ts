@@ -13,7 +13,8 @@ export interface IndexedCourse {
   sectionTexts: string[]
 }
 
-export interface CourseFilters {
+/** The search box, day chips and units dropdown, as one value. */
+export interface FilterState {
   /** Free-text query; whitespace-separated tokens must all match (AND). */
   query: string
   /** Keep sections that meet on at least one of these days; empty means any day. */
@@ -54,7 +55,7 @@ export function buildSearchIndex(courses: Course[]): IndexedCourse[] {
  * one of its sections matches; the returned `sections` are only the matching
  * ones. Each query token may match the course text or the section text.
  */
-export function filterCourses(index: IndexedCourse[], filters: CourseFilters): FilteredCourse[] {
+export function filterCourses(index: IndexedCourse[], filters: FilterState): FilteredCourse[] {
   const tokens = tokenize(filters.query)
   const result: FilteredCourse[] = []
 

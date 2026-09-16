@@ -13,7 +13,7 @@ import { Toast } from './components/ui/Toast'
 import { useCourses } from './hooks/useCourses'
 import { useDebouncedValue } from './hooks/useDebouncedValue'
 import { useToast } from './hooks/useToast'
-import { buildSearchIndex, filterCourses, type CourseFilters as Filters } from './lib/filter'
+import { buildSearchIndex, filterCourses, type FilterState } from './lib/filter'
 import { totalUnits } from './lib/schedule'
 import { useSchedule } from './state/ScheduleContext'
 import { useSelectedSections } from './state/useSelectedSections'
@@ -39,7 +39,10 @@ export function App() {
 
   // Indexed once per catalogue; filtered only when the debounced inputs change.
   const index = useMemo(() => buildSearchIndex(data), [data])
-  const filters = useMemo<Filters>(() => ({ query: debouncedQuery, days, units }), [debouncedQuery, days, units])
+  const filters = useMemo<FilterState>(
+    () => ({ query: debouncedQuery, days, units }),
+    [debouncedQuery, days, units],
+  )
   const visible = useMemo(() => filterCourses(index, filters), [index, filters])
   const unitOptions = useMemo(() => [...new Set(data.map((course) => course.units))].sort((a, b) => a - b), [data])
   const hasActiveFilters = query !== '' || days.length > 0 || units !== null
