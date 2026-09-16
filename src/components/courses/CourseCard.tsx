@@ -54,7 +54,10 @@ export const CourseCard = memo(function CourseCard({
         aria-expanded={expanded}
         aria-controls={listId}
         onClick={() => setExpandedOverride(!expanded)}
-        className="flex w-full items-start justify-between gap-3 rounded-lg px-4 py-3 text-left hover:bg-gray-50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand"
+        className={
+          'flex w-full items-start justify-between gap-3 rounded-lg px-4 py-3 text-left hover:bg-gray-50 ' +
+          'focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand'
+        }
       >
         {/* Only phrasing content is valid inside a <button>, hence spans with block/flex rather than div/p. */}
         <span className="block min-w-0">
@@ -78,8 +81,9 @@ export const CourseCard = memo(function CourseCard({
         </span>
       </button>
 
+      {/* Rows are mounted only while expanded, so the DOM grows with what is visible rather than with the catalogue. */}
       <ul id={listId} hidden={!expanded} className="flex flex-col gap-2 border-t border-gray-100 px-4 py-3">
-        {sections.map((section) => (
+        {expanded && sections.map((section) => (
           <SectionItem
             key={section.id}
             courseId={course.id}
