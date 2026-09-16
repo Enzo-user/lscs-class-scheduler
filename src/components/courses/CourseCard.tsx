@@ -20,8 +20,10 @@ export interface CourseCardProps {
 
 /**
  * Course header plus a collapsible list of its sections. Memoised so that
- * typing in the search box (which changes only the list) does not re-render
- * cards whose props are unchanged.
+ * App re-renders that do not touch this card (un-debounced keystrokes, toast
+ * updates, filter changes that leave its sections intact) skip it. Any add
+ * or remove still reaches every card through `entries`, which is what the
+ * conflict notes need.
  */
 export const CourseCard = memo(function CourseCard({
   course,

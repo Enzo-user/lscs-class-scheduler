@@ -64,6 +64,13 @@ describe('filterCourses', () => {
     expect(ids(filterCourses(index, { ...EMPTY_FILTERS, units: 1 }))).toEqual(['LBYARCH:S11'])
   })
 
+  it('returns the original sections array when every section matches', () => {
+    const [prog] = filterCourses(index, { ...EMPTY_FILTERS, query: 'prog' })
+    expect(prog?.sections).toBe(catalogue[0]?.sections)
+    const [progSantos] = filterCourses(index, { ...EMPTY_FILTERS, query: 'prog santos' })
+    expect(progSantos?.sections).not.toBe(catalogue[0]?.sections)
+  })
+
   it('combines all filters', () => {
     expect(ids(filterCourses(index, { query: 'santos', days: ['Wednesday'], units: 3 }))).toEqual(['CCDSTRU:S11'])
   })

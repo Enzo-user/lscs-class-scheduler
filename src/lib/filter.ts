@@ -54,6 +54,8 @@ export function buildSearchIndex(courses: Course[]): IndexedCourse[] {
  * Applies query, day and unit filters. A course stays visible when at least
  * one of its sections matches; the returned `sections` are only the matching
  * ones. Each query token may match the course text or the section text.
+ * A course whose sections all match gets its original `sections` array back,
+ * so the memoised card for it sees unchanged props and skips its re-render.
  */
 export function filterCourses(index: IndexedCourse[], filters: FilterState): FilteredCourse[] {
   const tokens = tokenize(filters.query)
@@ -67,7 +69,11 @@ export function filterCourses(index: IndexedCourse[], filters: FilterState): Fil
       return tokens.every((token) => text.includes(token)) && meetsOnAnyDay(section, filters.days)
     })
 
-    if (sections.length > 0) result.push({ course, sections })
+    if (sections.length === course.sections.length) {
+      result.push({ course, sections: course.sections })
+    } else if (sections.length > 0) {
+      result.push({ course, sections })
+    }
   }
 
   return result
