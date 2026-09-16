@@ -68,6 +68,8 @@ describe('day helpers', () => {
   it('guards Day and time strings', () => {
     expect(isDay('Monday')).toBe(true)
     expect(isDay('Sunday')).toBe(false)
+    expect(isDay('toString')).toBe(false)
+    expect(isDay('constructor')).toBe(false)
     expect(isDay(1)).toBe(false)
     expect(isTime('07:30')).toBe(true)
     expect(isTime('7:30')).toBe(false)

@@ -21,9 +21,12 @@ const DAY_ABBREVIATIONS: Record<Day, string> = {
 
 const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/
 
-/** Type guard for the Day union, used when validating API responses. */
+/**
+ * Type guard for the Day union, used when validating API responses.
+ * `Object.hasOwn` rather than `in`, so inherited keys such as "toString" are rejected.
+ */
 export function isDay(value: unknown): value is Day {
-  return typeof value === 'string' && value in DAY_ABBREVIATIONS
+  return typeof value === 'string' && Object.hasOwn(DAY_ABBREVIATIONS, value)
 }
 
 /** True for a well-formed 24-hour "HH:mm" string such as "09:15". */
