@@ -72,7 +72,8 @@ export const SectionItem = memo(function SectionItem({
               <span aria-hidden="true">✓ </span>Added
             </span>
             <Button size="sm" variant="ghost" onClick={() => onRemove(courseId)}>
-              Remove<span className="sr-only"> {name}</span>
+              Remove{' '}
+              <span className="sr-only">{name}</span>
             </Button>
           </>
         ) : (
@@ -85,8 +86,8 @@ export const SectionItem = memo(function SectionItem({
               if (!blocked) onAdd(courseId, section.id)
             }}
           >
-            {state === 'switch' ? 'Switch to this section' : 'Add'}
-            <span className="sr-only"> {name}</span>
+            {state === 'switch' ? 'Switch to this section' : 'Add'}{' '}
+            <span className="sr-only">{name}</span>
           </Button>
         )}
       </div>

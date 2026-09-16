@@ -50,7 +50,7 @@ export function ScheduleSummary({ entries, onRemove, onClear }: ScheduleSummaryP
         )}
       </div>
 
-      <ul className="mt-3 flex flex-col gap-2">
+      <ul aria-label="Selected sections" className="mt-3 flex flex-col gap-2">
         {entries.map(({ course, section }) => (
           <li
             key={section.id}
@@ -74,7 +74,10 @@ export function ScheduleSummary({ entries, onRemove, onClear }: ScheduleSummaryP
               </div>
             </div>
             <Button size="sm" variant="ghost" onClick={() => onRemove(course.id)}>
-              Remove<span className="sr-only"> {course.code} {section.section}</span>
+              Remove{' '}
+              <span className="sr-only">
+                {course.code} {section.section}
+              </span>
             </Button>
           </li>
         ))}
