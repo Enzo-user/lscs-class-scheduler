@@ -28,8 +28,6 @@ export interface FilteredCourse {
   sections: Section[]
 }
 
-export const EMPTY_FILTERS: CourseFilters = { query: '', days: [], units: null }
-
 /** Lowercases and collapses whitespace so comparisons are case- and spacing-insensitive. */
 export function normalize(text: string): string {
   return text.toLowerCase().trim().replace(/\s+/g, ' ')

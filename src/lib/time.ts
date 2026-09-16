@@ -58,11 +58,6 @@ export function formatTimeRange(startTime: string, endTime: string): string {
   return `${formatTime(startTime)}–${formatTime(endTime)}`
 }
 
-/** Formats a single meeting, e.g. "Mon 9:15–10:45 AM". */
-export function formatSlot(slot: ScheduleSlot): string {
-  return `${abbreviateDay(slot.day)} ${formatTimeRange(slot.startTime, slot.endTime)}`
-}
-
 /**
  * Formats a whole schedule compactly, merging days that share the same time:
  * Monday + Thursday 09:15–10:45 → "Mon/Thu 9:15–10:45 AM". Meetings at

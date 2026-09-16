@@ -1,14 +1,12 @@
 import { useMemo } from 'react'
-import { buildTimetable, type SelectedSection } from '../../lib/schedule'
-import { DAYS, abbreviateDay } from '../../lib/time'
+import { TIMETABLE_RANGE, buildTimetable, type SelectedSection } from '../../lib/schedule'
+import { DAYS, abbreviateDay, formatTime } from '../../lib/time'
 import { TimetableBlock } from './TimetableBlock'
 
 export interface TimetableProps {
   entries: SelectedSection[]
 }
 
-/** Visible window; classes run 07:30–19:30 so this leaves a margin either side. */
-const TIMETABLE_RANGE = { startTime: '07:00', endTime: '21:00' }
 /** One 15-minute grid row in rem, so an hour is 3rem and a 1.5h class is 4.5rem tall. */
 const ROW_HEIGHT_REM = 0.75
 
@@ -23,7 +21,8 @@ export function Timetable({ entries }: TimetableProps) {
   return (
     <div className="relative">
       <p className="sr-only">
-        Weekly timetable from {layout.hourLabels[0]?.label} to 9:00 PM, Monday to Saturday.
+        Weekly timetable from {formatTime(TIMETABLE_RANGE.startTime)} to{' '}
+        {formatTime(TIMETABLE_RANGE.endTime)}, Monday to Saturday.
         {entries.length === 0
           ? ' No classes scheduled.'
           : ` ${layout.blocks.length} class meetings are shown; the list above has the details.`}

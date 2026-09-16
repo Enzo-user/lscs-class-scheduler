@@ -4,7 +4,6 @@ import {
   DAYS,
   abbreviateDay,
   formatSchedule,
-  formatSlot,
   formatTime,
   formatTimeRange,
   isDay,
@@ -39,11 +38,7 @@ describe('formatTimeRange', () => {
   })
 })
 
-describe('formatSlot and formatSchedule', () => {
-  it('formats a single meeting with its day', () => {
-    expect(formatSlot(slot('Wednesday', '16:15', '17:45'))).toBe('Wed 4:15–5:45 PM')
-  })
-
+describe('formatSchedule', () => {
   it('merges days that share a time, in weekday order', () => {
     const schedule = [slot('Thursday', '09:15', '10:45'), slot('Monday', '09:15', '10:45')]
     expect(formatSchedule(schedule)).toBe('Mon/Thu 9:15–10:45 AM')

@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { makeCourse, makeSection, slot } from '../test/fixtures'
-import { EMPTY_FILTERS, buildSearchIndex, filterCourses, normalize, tokenize } from './filter'
+import { buildSearchIndex, filterCourses, normalize, tokenize, type CourseFilters } from './filter'
+
+const EMPTY_FILTERS: CourseFilters = { query: '', days: [], units: null }
 
 const catalogue = [
   makeCourse({

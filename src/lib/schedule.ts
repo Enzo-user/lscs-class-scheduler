@@ -60,10 +60,10 @@ export function resolveSelectedSections(
 }
 
 /** Height of one CSS grid row in the timetable, in minutes. */
-export const TIMETABLE_STEP_MINUTES = 15
+const TIMETABLE_STEP_MINUTES = 15
 
-/** Default visible window; classes run 07:30–19:30 so this leaves a margin either side. */
-export const DEFAULT_TIMETABLE_RANGE = { startTime: '07:00', endTime: '21:30' }
+/** The window the app draws; catalogue classes run 07:30–21:00, so this leaves a margin at the top. */
+export const TIMETABLE_RANGE = { startTime: '07:00', endTime: '21:00' }
 
 export interface TimetableBlock {
   /** Unique per rendered block (a section meeting twice a week yields two blocks). */
@@ -94,7 +94,7 @@ export interface TimetableLayout {
  */
 export function buildTimetable(
   entries: SelectedSection[],
-  range = DEFAULT_TIMETABLE_RANGE,
+  range: { startTime: string; endTime: string },
 ): TimetableLayout {
   const startMinutes = parseTime(range.startTime)
   const endMinutes = parseTime(range.endTime)
