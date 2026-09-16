@@ -37,6 +37,10 @@ export function Button({
   ...rest
 }: ButtonProps) {
   return (
-    <button type={type} className={`${BASE} ${VARIANTS[variant]} ${SIZES[size]} ${className}`} {...rest} />
+    <button
+      type={type}
+      className={`${BASE} ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
+      {...rest}
+    />
   )
 }

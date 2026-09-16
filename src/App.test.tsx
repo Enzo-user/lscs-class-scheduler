@@ -21,7 +21,11 @@ const CATALOGUE = [
     title: 'Object-Oriented Programming',
     sections: [
       makeSection({ id: 'CCPROG3-S11', instructor: 'Juan Dela Cruz' }),
-      makeSection({ id: 'CCPROG3-S12', instructor: 'Maria Santos', schedule: [slot('Tuesday', '11:00', '12:30')] }),
+      makeSection({
+        id: 'CCPROG3-S12',
+        instructor: 'Maria Santos',
+        schedule: [slot('Tuesday', '11:00', '12:30')],
+      }),
     ],
   }),
   makeCourse({
@@ -29,10 +33,18 @@ const CATALOGUE = [
     title: 'Computer Organization',
     sections: [
       makeSection({ id: 'CSARCH1-S11', instructor: 'Pedro Reyes' }),
-      makeSection({ id: 'CSARCH1-S12', instructor: 'Ana Lim', schedule: [slot('Wednesday', '14:30', '16:00')] }),
+      makeSection({
+        id: 'CSARCH1-S12',
+        instructor: 'Ana Lim',
+        schedule: [slot('Wednesday', '14:30', '16:00')],
+      }),
     ],
   }),
-  makeCourse({ id: 'GEETHIC', title: 'Ethics', sections: [makeSection({ id: 'GEETHIC-S11', schedule: [slot('Friday', '07:30', '09:00')] })] }),
+  makeCourse({
+    id: 'GEETHIC',
+    title: 'Ethics',
+    sections: [makeSection({ id: 'GEETHIC-S11', schedule: [slot('Friday', '07:30', '09:00')] })],
+  }),
 ]
 
 function renderApp() {
@@ -51,7 +63,8 @@ async function loadCatalogue() {
 }
 
 const schedulePanel = () => screen.getByRole('region', { name: 'My schedule' })
-const summaryItems = () => within(screen.getByRole('list', { name: 'Selected sections' })).getAllByRole('listitem')
+const summaryItems = () =>
+  within(screen.getByRole('list', { name: 'Selected sections' })).getAllByRole('listitem')
 
 beforeEach(() => {
   localStorage.clear()
@@ -145,7 +158,9 @@ describe('App', () => {
     expect(summaryItems()[0]).not.toHaveTextContent('CSARCH1')
 
     // A non-clashing section of the same course is still selectable.
-    expect(screen.getByRole('button', { name: 'Add CSARCH1 S12' })).not.toHaveAttribute('aria-disabled')
+    expect(screen.getByRole('button', { name: 'Add CSARCH1 S12' })).not.toHaveAttribute(
+      'aria-disabled',
+    )
   })
 
   it('clears the whole schedule after confirming', async () => {
@@ -161,12 +176,17 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: 'Clear all' }))
     await user.click(screen.getByRole('button', { name: 'Yes, clear all' }))
     expect(within(schedulePanel()).getByText('No sections yet')).toBeInTheDocument()
-    expect(within(schedulePanel()).getByRole('heading', { name: 'Selected sections' })).toHaveFocus()
+    expect(
+      within(schedulePanel()).getByRole('heading', { name: 'Selected sections' }),
+    ).toHaveFocus()
   })
 
   it('flags a restored selection that clashes with another entry', async () => {
     // Only reachable through stale storage: the UI blocks conflicting adds.
-    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify({ CCPROG3: 'CCPROG3-S11', CSARCH1: 'CSARCH1-S11' }))
+    localStorage.setItem(
+      SCHEDULE_STORAGE_KEY,
+      JSON.stringify({ CCPROG3: 'CCPROG3-S11', CSARCH1: 'CSARCH1-S11' }),
+    )
     renderApp()
     await loadCatalogue()
 

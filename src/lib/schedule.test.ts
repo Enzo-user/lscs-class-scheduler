@@ -13,22 +13,33 @@ import {
 
 describe('slotsOverlap', () => {
   it('detects partial and full overlaps on the same day', () => {
-    expect(slotsOverlap(slot('Monday', '09:15', '10:45'), slot('Monday', '10:00', '11:30'))).toBe(true)
-    expect(slotsOverlap(slot('Monday', '09:00', '12:00'), slot('Monday', '10:00', '10:30'))).toBe(true)
+    expect(slotsOverlap(slot('Monday', '09:15', '10:45'), slot('Monday', '10:00', '11:30'))).toBe(
+      true,
+    )
+    expect(slotsOverlap(slot('Monday', '09:00', '12:00'), slot('Monday', '10:00', '10:30'))).toBe(
+      true,
+    )
   })
 
   it('treats touching intervals as free', () => {
-    expect(slotsOverlap(slot('Monday', '07:30', '09:00'), slot('Monday', '09:00', '10:30'))).toBe(false)
+    expect(slotsOverlap(slot('Monday', '07:30', '09:00'), slot('Monday', '09:00', '10:30'))).toBe(
+      false,
+    )
   })
 
   it('never overlaps across different days', () => {
-    expect(slotsOverlap(slot('Monday', '09:15', '10:45'), slot('Tuesday', '09:15', '10:45'))).toBe(false)
+    expect(slotsOverlap(slot('Monday', '09:15', '10:45'), slot('Tuesday', '09:15', '10:45'))).toBe(
+      false,
+    )
   })
 })
 
 describe('sectionsConflict', () => {
   it('conflicts when any meeting overlaps', () => {
-    const a = makeSection({ id: 'A-S11', schedule: [slot('Monday', '09:15', '10:45'), slot('Thursday', '09:15', '10:45')] })
+    const a = makeSection({
+      id: 'A-S11',
+      schedule: [slot('Monday', '09:15', '10:45'), slot('Thursday', '09:15', '10:45')],
+    })
     const b = makeSection({ id: 'B-S11', schedule: [slot('Thursday', '10:00', '11:30')] })
     expect(sectionsConflict(a, b)).toBe(true)
   })
@@ -64,7 +75,10 @@ describe('findConflicts', () => {
 
   it('ignores sections of the same course because they would be replaced', () => {
     const selected = [{ course: prog, section: progS11 }]
-    const overlapping = makeSection({ id: 'CCPROG3-S13', schedule: [slot('Monday', '09:15', '10:45')] })
+    const overlapping = makeSection({
+      id: 'CCPROG3-S13',
+      schedule: [slot('Monday', '09:15', '10:45')],
+    })
     expect(findConflicts({ course: prog, section: overlapping }, selected)).toEqual([])
   })
 
@@ -81,15 +95,23 @@ describe('findConflicts', () => {
 
 describe('totalUnits', () => {
   it('sums course units', () => {
-    expect(totalUnits([makeCourse({ id: 'A', units: 3 }), makeCourse({ id: 'B', units: 1 })])).toBe(4)
+    expect(totalUnits([makeCourse({ id: 'A', units: 3 }), makeCourse({ id: 'B', units: 1 })])).toBe(
+      4,
+    )
     expect(totalUnits([])).toBe(0)
   })
 })
 
 describe('describeSchedule', () => {
   it('pluralises courses and units independently', () => {
-    const lab = { course: makeCourse({ id: 'LBYARCH', units: 1 }), section: makeSection({ id: 'LBYARCH-S11' }) }
-    const lecture = { course: makeCourse({ id: 'CCPROG3', units: 3 }), section: makeSection({ id: 'CCPROG3-S11' }) }
+    const lab = {
+      course: makeCourse({ id: 'LBYARCH', units: 1 }),
+      section: makeSection({ id: 'LBYARCH-S11' }),
+    }
+    const lecture = {
+      course: makeCourse({ id: 'CCPROG3', units: 3 }),
+      section: makeSection({ id: 'CCPROG3-S11' }),
+    }
     expect(describeSchedule([])).toBe('0 courses · 0 units')
     expect(describeSchedule([lab])).toBe('1 course · 1 unit')
     expect(describeSchedule([lab, lecture])).toBe('2 courses · 4 units')
@@ -116,7 +138,12 @@ describe('resolveSelectedSections', () => {
 describe('buildTimetable', () => {
   const course = makeCourse({
     id: 'A',
-    sections: [makeSection({ id: 'A-S11', schedule: [slot('Monday', '09:15', '10:45'), slot('Thursday', '09:15', '10:45')] })],
+    sections: [
+      makeSection({
+        id: 'A-S11',
+        schedule: [slot('Monday', '09:15', '10:45'), slot('Thursday', '09:15', '10:45')],
+      }),
+    ],
   })
   const [section] = course.sections
   if (!section) throw new Error('fixture setup')
@@ -125,8 +152,18 @@ describe('buildTimetable', () => {
     const layout = buildTimetable([{ course, section }], { startTime: '07:00', endTime: '21:30' })
     expect(layout.rowCount).toBe(58)
     expect(layout.blocks).toHaveLength(2)
-    expect(layout.blocks[0]).toMatchObject({ key: 'A-S11-Monday', dayIndex: 0, startRow: 10, endRow: 16 })
-    expect(layout.blocks[1]).toMatchObject({ key: 'A-S11-Thursday', dayIndex: 3, startRow: 10, endRow: 16 })
+    expect(layout.blocks[0]).toMatchObject({
+      key: 'A-S11-Monday',
+      dayIndex: 0,
+      startRow: 10,
+      endRow: 16,
+    })
+    expect(layout.blocks[1]).toMatchObject({
+      key: 'A-S11-Thursday',
+      dayIndex: 3,
+      startRow: 10,
+      endRow: 16,
+    })
   })
 
   it('labels every full hour in the window', () => {
@@ -140,7 +177,10 @@ describe('buildTimetable', () => {
 
   it('clamps meetings outside the window to its edges', () => {
     const early = makeSection({ id: 'A-S12', schedule: [slot('Monday', '06:00', '07:30')] })
-    const layout = buildTimetable([{ course, section: early }], { startTime: '07:00', endTime: '09:00' })
+    const layout = buildTimetable([{ course, section: early }], {
+      startTime: '07:00',
+      endTime: '09:00',
+    })
     expect(layout.blocks[0]).toMatchObject({ startRow: 1, endRow: 3 })
   })
 })

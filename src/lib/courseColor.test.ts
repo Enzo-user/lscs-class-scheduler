@@ -11,7 +11,16 @@ describe('courseColorClasses', () => {
   })
 
   it('spreads different courses across the palette', () => {
-    const ids = ['CCPROG1', 'CCPROG2', 'CCPROG3', 'CCDSTRU', 'CSARCH1', 'GEETHIC', 'STDISCM', 'LBYARCH']
+    const ids = [
+      'CCPROG1',
+      'CCPROG2',
+      'CCPROG3',
+      'CCDSTRU',
+      'CSARCH1',
+      'GEETHIC',
+      'STDISCM',
+      'LBYARCH',
+    ]
     expect(new Set(ids.map(courseColorClasses)).size).toBeGreaterThan(1)
   })
 })

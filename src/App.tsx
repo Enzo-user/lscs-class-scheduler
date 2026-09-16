@@ -44,13 +44,18 @@ export function App() {
     [debouncedQuery, days, units],
   )
   const visible = useMemo(() => filterCourses(index, filters), [index, filters])
-  const unitOptions = useMemo(() => [...new Set(data.map((course) => course.units))].sort((a, b) => a - b), [data])
+  const unitOptions = useMemo(
+    () => [...new Set(data.map((course) => course.units))].sort((a, b) => a - b),
+    [data],
+  )
   // Derived from the debounced `filters`, not the raw query, so the empty
   // state agrees with the list it sits next to during the debounce window.
   const hasActiveFilters = filters.query !== '' || filters.days.length > 0 || filters.units !== null
 
   const toggleDay = useCallback((day: Day) => {
-    setDays((current) => (current.includes(day) ? current.filter((d) => d !== day) : [...current, day]))
+    setDays((current) =>
+      current.includes(day) ? current.filter((d) => d !== day) : [...current, day],
+    )
   }, [])
   const clearFilters = useCallback(() => {
     setQuery('')
@@ -114,7 +119,12 @@ export function App() {
         scheduleCount={entries.length}
         browse={
           <div className="flex flex-col gap-4">
-            <CourseSearch value={query} onChange={setQuery} resultCount={loading ? null : visible.length} totalCount={data.length} />
+            <CourseSearch
+              value={query}
+              onChange={setQuery}
+              resultCount={loading ? null : visible.length}
+              totalCount={data.length}
+            />
             <CourseFilters
               days={days}
               onToggleDay={toggleDay}

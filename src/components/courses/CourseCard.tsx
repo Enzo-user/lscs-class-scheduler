@@ -82,19 +82,24 @@ export const CourseCard = memo(function CourseCard({
       </button>
 
       {/* Rows are mounted only while expanded, so the DOM grows with what is visible rather than with the catalogue. */}
-      <ul id={listId} hidden={!expanded} className="flex flex-col gap-2 border-t border-gray-100 px-4 py-3">
-        {expanded && sections.map((section) => (
-          <SectionItem
-            key={section.id}
-            courseId={course.id}
-            courseCode={course.code}
-            section={section}
-            state={sectionState(section, selectedSectionId)}
-            conflictsWith={describeConflicts({ course, section }, entries)}
-            onAdd={onAdd}
-            onRemove={onRemove}
-          />
-        ))}
+      <ul
+        id={listId}
+        hidden={!expanded}
+        className="flex flex-col gap-2 border-t border-gray-100 px-4 py-3"
+      >
+        {expanded &&
+          sections.map((section) => (
+            <SectionItem
+              key={section.id}
+              courseId={course.id}
+              courseCode={course.code}
+              section={section}
+              state={sectionState(section, selectedSectionId)}
+              conflictsWith={describeConflicts({ course, section }, entries)}
+              onAdd={onAdd}
+              onRemove={onRemove}
+            />
+          ))}
       </ul>
     </li>
   )
@@ -104,4 +109,3 @@ function sectionState(section: Section, selectedSectionId: string | undefined): 
   if (selectedSectionId === undefined) return 'add'
   return selectedSectionId === section.id ? 'selected' : 'switch'
 }
-

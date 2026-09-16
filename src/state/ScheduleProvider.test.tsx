@@ -36,7 +36,9 @@ describe('ScheduleProvider', () => {
   it('persists the selection to localStorage under the versioned key', () => {
     const { result } = renderHook(() => useSchedule(), { wrapper })
     act(() => result.current.addSection('CCPROG3', 'CCPROG3-S11'))
-    expect(JSON.parse(localStorage.getItem(SCHEDULE_STORAGE_KEY) ?? 'null')).toEqual({ CCPROG3: 'CCPROG3-S11' })
+    expect(JSON.parse(localStorage.getItem(SCHEDULE_STORAGE_KEY) ?? 'null')).toEqual({
+      CCPROG3: 'CCPROG3-S11',
+    })
   })
 
   it('restores a persisted selection on mount', () => {

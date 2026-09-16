@@ -12,7 +12,13 @@ export interface CourseFiltersProps {
 }
 
 /** Day chips (multi-select) and a units dropdown. */
-export function CourseFilters({ days, onToggleDay, units, unitOptions, onUnitsChange }: CourseFiltersProps) {
+export function CourseFilters({
+  days,
+  onToggleDay,
+  units,
+  unitOptions,
+  onUnitsChange,
+}: CourseFiltersProps) {
   const unitsId = useId()
   const daysId = useId()
 
@@ -52,7 +58,9 @@ export function CourseFilters({ days, onToggleDay, units, unitOptions, onUnitsCh
         <select
           id={unitsId}
           value={units ?? ''}
-          onChange={(event) => onUnitsChange(event.target.value === '' ? null : Number(event.target.value))}
+          onChange={(event) =>
+            onUnitsChange(event.target.value === '' ? null : Number(event.target.value))
+          }
           className={
             'mt-1 min-h-10 rounded-md border border-gray-300 bg-white px-2 text-sm sm:min-h-9 ' +
             'focus:outline-2 focus:outline-offset-1 focus:outline-brand'

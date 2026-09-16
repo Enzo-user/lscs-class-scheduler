@@ -61,7 +61,10 @@ export function Timetable({ entries }: TimetableProps) {
               >
                 {label}
               </div>
-              <div className="border-t border-gray-100" style={{ gridRow: row + 1, gridColumn: '2 / -1' }} />
+              <div
+                className="border-t border-gray-100"
+                style={{ gridRow: row + 1, gridColumn: '2 / -1' }}
+              />
             </div>
           ))}
 

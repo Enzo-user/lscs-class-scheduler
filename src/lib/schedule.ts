@@ -14,7 +14,9 @@ export interface SelectedSection {
  */
 export function slotsOverlap(a: ScheduleSlot, b: ScheduleSlot): boolean {
   if (a.day !== b.day) return false
-  return parseTime(a.startTime) < parseTime(b.endTime) && parseTime(b.startTime) < parseTime(a.endTime)
+  return (
+    parseTime(a.startTime) < parseTime(b.endTime) && parseTime(b.startTime) < parseTime(a.endTime)
+  )
 }
 
 /** True when any meeting of `a` overlaps any meeting of `b`. */

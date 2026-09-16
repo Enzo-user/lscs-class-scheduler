@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Brand tokens. Tailwind v4 turns these into utilities such as
    `bg-brand`, `text-brand-dark`, `border-brand`. */

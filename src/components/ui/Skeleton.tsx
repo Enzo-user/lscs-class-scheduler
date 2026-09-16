@@ -9,5 +9,10 @@ export interface SkeletonProps {
  * the user has not asked for reduced motion.
  */
 export function Skeleton({ className = '' }: SkeletonProps) {
-  return <div aria-hidden="true" className={`rounded bg-gray-200 motion-safe:animate-pulse ${className}`} />
+  return (
+    <div
+      aria-hidden="true"
+      className={`rounded bg-gray-200 motion-safe:animate-pulse ${className}`}
+    />
+  )
 }

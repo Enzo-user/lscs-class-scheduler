@@ -38,7 +38,9 @@ describe('SectionItem', () => {
 
   it('offers to switch when another section of the course is selected', () => {
     renderItem({ state: 'switch' })
-    expect(screen.getByRole('button', { name: 'Switch to this section CCPROG3 S11' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: 'Switch to this section CCPROG3 S11' }),
+    ).toBeInTheDocument()
   })
 
   it('shows Added and a Remove button when selected', async () => {

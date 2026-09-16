@@ -94,7 +94,10 @@ export function ScheduleSummary({ entries, onRemove, onClear }: ScheduleSummaryP
                     <div className="min-w-0 text-sm">
                       <p className="font-semibold text-gray-900">
                         {course.code} {section.section}
-                        <span className="font-normal text-gray-600"> · {pluralize(course.units, 'unit')}</span>
+                        <span className="font-normal text-gray-600">
+                          {' '}
+                          · {pluralize(course.units, 'unit')}
+                        </span>
                       </p>
                       <p className="text-gray-700">{section.instructor}</p>
                       <p className="text-gray-700">
