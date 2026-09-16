@@ -12,15 +12,15 @@ Required by the brief:
 - **Search and filter.** Free-text search over code, title, section and instructor (all typed words must match), day chips ("meets on any of these days") and a units dropdown. A live "Showing X of Y courses" line reports the result.
 - **Add a section** to the schedule from its card, with toast feedback ("Added CCPROG1 S11").
 - **Remove or change a section.** A course with a section already selected offers "Switch to this section" on its other sections; "Remove" is available both on the card and in the schedule list. "Clear all" asks for confirmation first.
-- **Timetable.** The schedule is drawn as a weekly CSS-grid timetable (07:00 to 21:00, 15-minute rows) with colour-coded blocks, next to a readable list of the selected sections and a running units total.
+- **Timetable.** The schedule is drawn as a weekly CSS-grid timetable (07:00 to 21:00, 15-minute rows) with colour-coded blocks, together with a readable list of the selected sections and a running units total.
 
 Extensions I implemented because they were small and made the required features safer:
 
 - **Conflict detection.** A section whose meetings overlap something already on the schedule cannot be added; its button is `aria-disabled` and the row says which selection it clashes with. Sections of the same course are excluded because choosing one replaces the other.
 - **Persistence.** The selection is saved to `localStorage` under a versioned key and restored on reload; corrupt or stale entries are ignored.
-- **Keyboard and screen-reader support.** Semantic landmarks and headings, labelled inputs, `aria-pressed` toggles, `aria-expanded` card headers, visible focus rings, live regions for loading, results and toasts, and an `sr-only` course name on every Add/Remove button.
+- **Keyboard and screen-reader support.** Semantic landmarks and headings, labelled inputs, `aria-pressed` toggles, `aria-expanded` card headers, visible focus rings, live regions for loading, results and toasts, and an `sr-only` course name on every Add/Remove button. Focus is never dropped: a section's Add button turns into its Remove button in place, and after removing from the schedule list or clearing it, focus moves to the "Selected sections" heading.
 - **Loading, empty and error states** for the catalogue, the filtered list and the schedule, with a retry button on errors.
-- **Tests.** 70 Vitest tests across 11 files covering the domain functions, reducer, provider persistence, API client, hooks and the UI end to end.
+- **Tests.** 74 Vitest tests across 12 files covering the domain functions, reducer, provider persistence, API client, hooks and the UI end to end.
 
 ## Getting started
 
@@ -35,14 +35,16 @@ npm run dev        # http://localhost:5173
 
 Other scripts:
 
-| Command             | What it does                                  |
-| ------------------- | --------------------------------------------- |
-| `npm run build`     | Type-checks (`tsc -b`) then builds to `dist/` |
-| `npm run preview`   | Serves the production build locally           |
-| `npm test`          | Runs the Vitest suite once (`vitest run`)     |
-| `npm run test:watch`| Runs Vitest in watch mode                     |
-| `npm run lint`      | Runs oxlint                                   |
-| `npm run typecheck` | Runs `tsc -b` without building                |
+| Command                | What it does                                  |
+| ---------------------- | --------------------------------------------- |
+| `npm run build`        | Type-checks (`tsc -b`) then builds to `dist/` |
+| `npm run preview`      | Serves the production build locally           |
+| `npm test`             | Runs the Vitest suite once (`vitest run`)     |
+| `npm run test:watch`   | Runs Vitest in watch mode                     |
+| `npm run lint`         | Runs oxlint                                   |
+| `npm run format`       | Formats the source with oxfmt                 |
+| `npm run format:check` | Fails if any file is not formatted            |
+| `npm run typecheck`    | Runs `tsc -b` without building                |
 
 ### Seeing the loading and error states
 
@@ -84,6 +86,7 @@ src/
     time.ts                   Day list, HH:mm parsing/validation, human-readable time and schedule formatting
     filter.ts                 Search index + query/day/units filtering
     schedule.ts               Overlap and conflict detection, unit totals, selection resolution, timetable layout
+    pluralize.ts              "1 unit" / "3 units"; the one spelling rule for counts
     courseColor.ts            Deterministic colour per course for timetable blocks and swatches
   state/
     scheduleReducer.ts        ScheduleState { selected: courseId -> sectionId } and its three actions
@@ -148,24 +151,27 @@ On conflicts: the brief says the mock data may be assumed conflict-free and that
 
 **Data layer: `api/coursesApi.ts` + `hooks/useCourses.ts`.** Components never call `fetch`; they call `useCourses()` and get a discriminated union (`loading | success | error`) plus `refetch`. The API module owns the base URL (`VITE_API_BASE_URL`, defaulting to the static file), the simulated latency and the mock error switch, and validates the payload. Swapping in a real backend is an environment variable, and deleting the mock behaviour is two constants in one file. The trade-off of hand-written type guards over a schema library like zod is a few more lines in exchange for one less dependency.
 
-**Domain logic in pure functions (`src/lib/`).** Overlap detection, conflict lookup, filtering, the search index, timetable row/column layout and time formatting are plain TypeScript with no React imports. They are the easiest code to test (over half of the 70 tests target them and the reducer) and the easiest to explain: `slotsOverlap` is one comparison, `buildTimetable` turns entries into `gridRow`/`gridColumn` numbers so the `Timetable` component only places boxes.
+**Domain logic in pure functions (`src/lib/`).** Overlap detection, conflict lookup, filtering, the search index, timetable row/column layout and time formatting are plain TypeScript with no React imports. They are the easiest code to test (over half of the 74 tests target them and the reducer) and the easiest to explain: `slotsOverlap` is one comparison, `buildTimetable` turns entries into `gridRow`/`gridColumn` numbers so the `Timetable` component only places boxes.
+
+**Tooling.** TypeScript runs with `strict` and `noUncheckedIndexedAccess` set explicitly in `tsconfig.app.json`, so every array index read is `T | undefined` and the fallbacks in the code are checked rather than decorative. oxlint enforces `react/rules-of-hooks` and `react/exhaustive-deps`, so a wrong dependency array fails `npm run lint`. oxfmt (same project as oxlint) formats the source at 100 columns; `npm run format:check` verifies it. The three tools together add one dev dependency beyond the Vite scaffold's defaults.
 
 **Performance decisions.**
 - `buildSearchIndex` lowercases and joins the searchable text once per fetched catalogue (`useMemo` on `data`), so each keystroke does an `includes` over short strings rather than re-normalising every course.
 - The search box is bound to the raw value for instant typing while filtering runs on a 200 ms debounced copy; `filterCourses` is memoised on the index and the filter object.
-- `CourseCard` and `SectionItem` are `React.memo` components. The provider's actions are `useCallback([])` so their identity never changes, and `SectionItem` receives only primitives and stable objects (`state`, a conflict string, the section), so an add or remove re-renders only the rows whose state or conflict text changed, not all 98. Cards skip re-renders caused by toast updates and un-debounced keystrokes.
+- `CourseCard` and `SectionItem` are `React.memo` components. The provider's actions are `useCallback([])` so their identity never changes, and `SectionItem` receives only primitives and stable objects (`state`, a conflict string, the section), so an add or remove re-renders only the rows whose state or conflict text changed, not all 98. Cards skip re-renders caused by toast updates, un-debounced keystrokes and filter changes that leave their sections intact (`filterCourses` hands back the course's original `sections` array in that case, so the memo comparison sees the same reference).
+- Collapsed cards do not mount their section rows, so the DOM grows with what is visible rather than with the size of the catalogue.
 - Selection lookups are object-key reads (`selected[course.id]`), the selected sections are resolved once (`useSelectedSections`), and the timetable layout is memoised on those entries. All lists are keyed by stable ids (`course.id`, `section.id`, `sectionId-day` for blocks).
 - Both panes stay mounted on mobile (`hidden` rather than unmounted) so switching tabs costs nothing and card expand state survives.
 
 At 10,000 courses the plain `<ul>` would be the bottleneck; `CourseList` marks where a windowed list (`@tanstack/react-virtual`) would wrap it. Search would move server-side with pagination, `useCourses` would become a query hook with a cache, and the client-side index would be dropped.
 
-**Responsiveness.** One layout component: from the `lg` breakpoint the catalogue and the schedule sit side by side (5/7 split) with the schedule pane sticky and scrolling internally; below it a two-button segmented control switches panes. The timetable keeps a 40 rem minimum width and scrolls horizontally inside its own box on phones so blocks stay legible instead of collapsing. Buttons have minimum heights for touch targets and the page never scrolls sideways.
+**Responsiveness.** One layout component: from the `lg` breakpoint the catalogue and the schedule sit side by side (5/7 split) with the schedule pane sticky and scrolling internally, timetable first and the selected-sections list under it, so the timetable is on screen however many courses are selected. Below `lg` a two-button segmented control switches panes; it sticks to the top of the viewport so the schedule is one tap away from anywhere in the list, and the list stays above the timetable there because the grid scrolls sideways. The timetable keeps a 40 rem minimum width and scrolls horizontally inside its own box on phones, with the hour labels stuck to the left edge so they stay visible after a swipe. Buttons, day chips and the units select are at least 40 px tall on phones (36 px from the `sm` breakpoint), and the page never scrolls sideways.
 
-**Accessibility.** Semantic `header`/`main`/`section` with headings, `label`s on inputs, a `fieldset`/`legend` for the day chips with `aria-pressed`, `aria-expanded`/`aria-controls` on card headers, `role="status"` live regions for loading, result counts and toasts, `role="alert"` for the error panel, and `focus-visible` rings on every control. Conflicting sections use `aria-disabled` plus `aria-describedby` pointing at the visible reason, so the button stays focusable and the reason is read out. The timetable grid itself is `aria-hidden`: it is a visual projection of the "Selected sections" list, which is the accessible representation, and a short `sr-only` summary says how many meetings are drawn. Colour is never the only signal; every block carries its course code.
+**Accessibility.** Semantic `header`/`main`/`section` with headings, `label`s on inputs, a `fieldset`/`legend` for the day chips with `aria-pressed`, `aria-expanded`/`aria-controls` on card headers (whose contents are spans, since a `button` only allows phrasing content), `role="status"` live regions for loading, result counts and toasts, `role="alert"` for the error panel, and `focus-visible` rings on every control. Conflicting sections use `aria-disabled` plus `aria-describedby` pointing at the visible reason, so the button stays focusable and the reason is read out. Focus management: a section row has one action button whose label switches between Add, Switch and Remove, so activating it never unmounts the element under focus; in the schedule list, where a removed row does disappear, focus moves to the "Selected sections" heading (`tabIndex={-1}`), and "Clear all" turns into "Yes, clear all" in place with Cancel handing focus back. The timetable grid itself is `aria-hidden`: it is a visual projection of the "Selected sections" list, which is the accessible representation, and a short `sr-only` summary says how many meetings are drawn. Text colours were checked against their backgrounds for WCAG AA, including on the green selected row. Colour is never the only signal; every block carries its course code.
 
 **Loading, empty and error states.** `useCourses` exposes a three-state union so `App` cannot render data that is not there. Loading shows card and schedule skeletons plus an `sr-only` "Loading courses…"; the filtered list distinguishes "No courses match" (with a Clear filters button) from a genuinely empty catalogue; the schedule shows "No sections yet" and an overlay on the empty timetable; errors render the message with a Retry button that aborts any in-flight request and refetches.
 
-**Testing.** Vitest with jsdom and Testing Library, 70 tests in 11 files. The pure domain modules are covered exhaustively because they hold the logic a reviewer would most want to trust (overlap edge cases such as touching intervals, AND-search tokens, clamping in the timetable). The reducer and provider tests pin the one-section-per-course rule, localStorage persistence and referential stability of the context value. The API tests use a mocked `fetch` and fake timers to cover HTTP errors, bad payloads, the mock error switch and abort during the delay. `App.test.tsx` drives the real component tree with a mocked API through the user journeys: load, search, add, switch, conflict, clear and error/retry. I did not add browser end-to-end tests; the jsdom suite already exercises the same DOM, and a Playwright layer would double the setup for one page.
+**Testing.** Vitest with jsdom and Testing Library, 74 tests in 12 files. The pure domain modules are covered exhaustively because they hold the logic a reviewer would most want to trust (overlap edge cases such as touching intervals, AND-search tokens, clamping in the timetable, a `Day` guard that rejects inherited keys like `"toString"`). The reducer and provider tests pin the one-section-per-course rule, localStorage persistence and referential stability of the context value. The API tests use a mocked `fetch` and fake timers to cover HTTP errors, bad payloads, the mock error switch and abort during the delay. `App.test.tsx` drives the real component tree with a mocked API through the user journeys: load, search, add, switch, conflict, clear, error/retry, where focus lands after each action, the empty state during the debounce window, and a stale stored selection that clashes. I did not add browser end-to-end tests; the jsdom suite already exercises the same DOM, and a Playwright layer would double the setup for one page.
 
 ## Known limitations and what I would do next
 
@@ -173,10 +179,11 @@ At 10,000 courses the plain `<ul>` would be the bottleneck; `CourseList` marks w
 - The 8-colour palette means distinct courses can share a colour on a busy timetable; the block text always identifies the course.
 - The mock error switch and the 500 ms delay are development aids inside the API module; they should be removed when a real backend exists.
 - Filters are not reflected in the URL, so a filtered view cannot be shared or restored on reload. Query-string state would be the next small feature.
-- The timetable window is fixed at 07:00–21:00, which fits the data; a real catalogue with evening classes would need the range derived from the selection.
+- The timetable window is fixed at 07:00–21:00, which fits the data; a real catalogue with later classes would need the range derived from the selection.
+- A stored selection is re-validated for missing courses and sections but not for conflicts, so if the catalogue's times change between visits two restored sections can overlap. The schedule list flags such entries with the same "Conflicts with …" note as the course list, but the timetable still draws their blocks on top of each other; the fix would be to split the column when blocks overlap.
 - No server, so no authentication, no per-student saved schedules beyond `localStorage`, and no enrolment capacity data.
 - Next steps, in order: URL-synced filters, list virtualization behind a size threshold, and a schedule export (image or `.ics`).
 
 ## UI at a glance
 
-The header shows the app title and, once loaded, the running "N courses · U units" total. On desktop the left column holds the search box, the Mon–Sat day chips, the units dropdown and the course cards; the right column is sticky and holds the selected-sections list above the weekly timetable. On a phone the same two panes sit behind a "Browse | My schedule (n)" toggle. Selected sections are highlighted in the brand green, with a "✓ S11 added" badge on the course card and "✓ Added" on the section row, clashing sections carry an amber "Conflicts with …" note, and every add, switch, remove or clear shows a brief toast at the bottom of the screen.
+The header shows the app title and, once loaded, the running "N courses · U units" total. On desktop the left column holds the search box, the Mon–Sat day chips, the units dropdown and the course cards; the right column is sticky and holds the weekly timetable above the selected-sections list. On a phone the same two panes sit behind a sticky "Browse | My schedule (n)" toggle, with the list above the timetable. Selected sections are highlighted in the brand green, with a "✓ S11 added" badge on the course card and "✓ Added" on the section row, clashing sections carry an amber "Conflicts with …" note, and every add, switch, remove or clear shows a brief toast at the bottom of the screen.
