@@ -1,0 +1,77 @@
+import { useState, type ReactNode } from 'react'
+
+type Pane = 'browse' | 'schedule'
+
+export interface AppLayoutProps {
+  browse: ReactNode
+  schedule: ReactNode
+  /** Shown in the mobile "My schedule" tab label. */
+  scheduleCount: number
+}
+
+/**
+ * Two columns from the `lg` breakpoint (browser left, sticky schedule right);
+ * below it, a segmented control switches between the two panes. Both panes
+ * stay mounted so switching is instant and scroll/expand state survives.
+ */
+export function AppLayout({ browse, schedule, scheduleCount }: AppLayoutProps) {
+  const [pane, setPane] = useState<Pane>('browse')
+
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:py-6">
+      <div className="mb-4 grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-1 lg:hidden">
+        <PaneButton active={pane === 'browse'} onClick={() => setPane('browse')}>
+          Browse
+        </PaneButton>
+        <PaneButton active={pane === 'schedule'} onClick={() => setPane('schedule')}>
+          My schedule ({scheduleCount})
+        </PaneButton>
+      </div>
+
+      <div className="lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-6">
+        <section
+          aria-labelledby="browse-heading"
+          className={pane === 'browse' ? '' : 'hidden lg:block'}
+        >
+          <h2 id="browse-heading" className="sr-only">
+            Courses
+          </h2>
+          {browse}
+        </section>
+
+        <section
+          aria-labelledby="schedule-heading"
+          className={`lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto ${
+            pane === 'schedule' ? '' : 'hidden lg:block'
+          }`}
+        >
+          <h2 id="schedule-heading" className="text-lg font-semibold text-gray-900">
+            My schedule
+          </h2>
+          {schedule}
+        </section>
+      </div>
+    </main>
+  )
+}
+
+interface PaneButtonProps {
+  active: boolean
+  onClick: () => void
+  children: ReactNode
+}
+
+function PaneButton({ active, onClick, children }: PaneButtonProps) {
+  return (
+    <button
+      type="button"
+      aria-pressed={active}
+      onClick={onClick}
+      className={`min-h-10 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
+        active ? 'bg-brand text-white' : 'text-gray-700 hover:bg-gray-100'
+      }`}
+    >
+      {children}
+    </button>
+  )
+}

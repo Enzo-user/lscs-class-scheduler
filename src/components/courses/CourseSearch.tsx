@@ -3,8 +3,8 @@ import { useId } from 'react'
 export interface CourseSearchProps {
   value: string
   onChange: (value: string) => void
-  /** Courses currently shown after search and filters. */
-  resultCount: number
+  /** Courses currently shown after search and filters; null while the catalogue is loading. */
+  resultCount: number | null
   /** Courses in the whole catalogue. */
   totalCount: number
 }
@@ -26,7 +26,7 @@ export function CourseSearch({ value, onChange, resultCount, totalCount }: Cours
           onChange={(event) => onChange(event.target.value)}
           placeholder="Code, title, section or instructor"
           autoComplete="off"
-          className="min-h-10 w-full rounded-md border border-gray-300 bg-white px-3 pr-16 text-sm placeholder:text-gray-400 focus:border-brand focus:outline-2 focus:outline-offset-1 focus:outline-brand"
+          className="min-h-10 w-full rounded-md border border-gray-300 bg-white px-3 pr-16 text-sm placeholder:text-gray-400 focus:border-brand focus:outline-2 focus:outline-offset-1 focus:outline-brand [&::-webkit-search-cancel-button]:appearance-none"
         />
         {value && (
           <button
@@ -38,8 +38,8 @@ export function CourseSearch({ value, onChange, resultCount, totalCount }: Cours
           </button>
         )}
       </div>
-      <p role="status" aria-live="polite" className="mt-1 text-xs text-gray-600">
-        Showing {resultCount} of {totalCount} courses
+      <p role="status" aria-live="polite" className="mt-1 min-h-4 text-xs text-gray-600">
+        {resultCount !== null && `Showing ${resultCount} of ${totalCount} courses`}
       </p>
     </div>
   )
