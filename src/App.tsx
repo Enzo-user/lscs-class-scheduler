@@ -45,7 +45,9 @@ export function App() {
   )
   const visible = useMemo(() => filterCourses(index, filters), [index, filters])
   const unitOptions = useMemo(() => [...new Set(data.map((course) => course.units))].sort((a, b) => a - b), [data])
-  const hasActiveFilters = query !== '' || days.length > 0 || units !== null
+  // Derived from the debounced `filters`, not the raw query, so the empty
+  // state agrees with the list it sits next to during the debounce window.
+  const hasActiveFilters = filters.query !== '' || filters.days.length > 0 || filters.units !== null
 
   const toggleDay = useCallback((day: Day) => {
     setDays((current) => (current.includes(day) ? current.filter((d) => d !== day) : [...current, day]))

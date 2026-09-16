@@ -83,6 +83,10 @@ describe('App', () => {
     await user.type(screen.getByLabelText('Search courses'), ' nomatch')
     await screen.findByText('No courses match')
     await user.click(screen.getByRole('button', { name: 'Clear filters' }))
+    // The list comes back after the debounce; until then the "empty catalogue"
+    // state must not flash in place of "No courses match".
+    expect(screen.queryByText('No courses available')).not.toBeInTheDocument()
+    expect(screen.getByText('No courses match')).toBeInTheDocument()
     await screen.findByText('Showing 3 of 3 courses')
   })
 
