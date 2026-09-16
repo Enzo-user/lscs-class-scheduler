@@ -11,21 +11,26 @@ export interface AppLayoutProps {
 
 /**
  * Two columns from the `lg` breakpoint (browser left, sticky schedule right);
- * below it, a segmented control switches between the two panes. Both panes
- * stay mounted so switching is instant and scroll/expand state survives.
+ * below it, a segmented control that sticks to the top of the viewport
+ * switches between the two panes, so the schedule is one tap away however far
+ * down the list the user is. Both panes stay mounted so switching is instant
+ * and scroll/expand state survives.
  */
 export function AppLayout({ browse, schedule, scheduleCount }: AppLayoutProps) {
   const [pane, setPane] = useState<Pane>('browse')
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:py-6">
-      <div className="mb-4 grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-1 lg:hidden">
-        <PaneButton active={pane === 'browse'} onClick={() => setPane('browse')}>
-          Browse
-        </PaneButton>
-        <PaneButton active={pane === 'schedule'} onClick={() => setPane('schedule')}>
-          My schedule ({scheduleCount})
-        </PaneButton>
+      {/* Negative margins let the sticky bar's background span the page gutters. */}
+      <div className="sticky top-0 z-20 -mx-4 -mt-4 mb-2 bg-gray-50 px-4 py-2 sm:-mx-6 sm:px-6 lg:hidden">
+        <div className="grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-1">
+          <PaneButton active={pane === 'browse'} onClick={() => setPane('browse')}>
+            Browse
+          </PaneButton>
+          <PaneButton active={pane === 'schedule'} onClick={() => setPane('schedule')}>
+            My schedule ({scheduleCount})
+          </PaneButton>
+        </div>
       </div>
 
       <div className="lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start lg:gap-6">
@@ -67,9 +72,9 @@ function PaneButton({ active, onClick, children }: PaneButtonProps) {
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`min-h-10 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
+      className={`min-h-10 rounded-md text-sm font-medium transition-colors ${
         active ? 'bg-brand text-white' : 'text-gray-700 hover:bg-gray-100'
-      }`}
+      } focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand`}
     >
       {children}
     </button>
