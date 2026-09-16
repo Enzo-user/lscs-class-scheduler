@@ -78,7 +78,10 @@ export function resolveSelectedSections(
 /** Height of one CSS grid row in the timetable, in minutes. */
 const TIMETABLE_STEP_MINUTES = 15
 
-/** The window the app draws; catalogue classes run 07:30–21:00, so this leaves a margin at the top. */
+/**
+ * The window the app draws. Catalogue classes run 07:30–21:00, so there is a
+ * margin at the top.
+ */
 export const TIMETABLE_RANGE = { startTime: '07:00', endTime: '21:00' }
 
 export interface TimetableBlock {

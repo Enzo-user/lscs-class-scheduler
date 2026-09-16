@@ -50,7 +50,10 @@ export function formatTime(time: string): string {
   return `${formatClock(time)} ${meridiem(time)}`
 }
 
-/** Formats a range, sharing the AM/PM suffix when both ends agree: "9:15–10:45 AM", "11:00 AM–12:30 PM". */
+/**
+ * Formats a range, sharing the AM/PM suffix when both ends agree:
+ * "9:15–10:45 AM", "11:00 AM–12:30 PM".
+ */
 export function formatTimeRange(startTime: string, endTime: string): string {
   if (meridiem(startTime) === meridiem(endTime)) {
     return `${formatClock(startTime)}–${formatTime(endTime)}`

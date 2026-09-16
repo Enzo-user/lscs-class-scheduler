@@ -59,7 +59,8 @@ export const CourseCard = memo(function CourseCard({
           'focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand'
         }
       >
-        {/* Only phrasing content is valid inside a <button>, hence spans with block/flex rather than div/p. */}
+        {/* Only phrasing content is valid inside a <button>, hence spans with
+            block/flex utilities rather than div/p. */}
         <span className="block min-w-0">
           <span className="flex flex-wrap items-center gap-2">
             <span className="font-semibold text-gray-900">{course.code}</span>
@@ -81,7 +82,8 @@ export const CourseCard = memo(function CourseCard({
         </span>
       </button>
 
-      {/* Rows are mounted only while expanded, so the DOM grows with what is visible rather than with the catalogue. */}
+      {/* Rows are mounted only while expanded, so the DOM grows with what is
+          visible rather than with the catalogue. */}
       <ul
         id={listId}
         hidden={!expanded}

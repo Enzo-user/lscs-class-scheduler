@@ -28,8 +28,9 @@ export function Timetable({ entries }: TimetableProps) {
           : ` ${layout.blocks.length} class meetings are shown; the Selected sections list has the details.`}
       </p>
 
-      {/* The grid keeps a minimum width so blocks stay readable on phones; it scrolls sideways
-          inside this box, with the time gutter stuck to the left edge so the hours stay visible. */}
+      {/* The grid keeps a minimum width so blocks stay readable on phones; it
+          scrolls sideways inside this box, with the time gutter stuck to the
+          left edge so the hours stay visible. */}
       <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
         <div
           aria-hidden="true"
