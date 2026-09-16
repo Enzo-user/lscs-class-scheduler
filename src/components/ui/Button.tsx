@@ -1,0 +1,40 @@
+import type { ButtonHTMLAttributes } from 'react'
+
+type Variant = 'primary' | 'secondary' | 'ghost' | 'danger'
+type Size = 'sm' | 'md'
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variant
+  size?: Size
+}
+
+const BASE =
+  'inline-flex items-center justify-center gap-1.5 rounded-md font-medium whitespace-nowrap ' +
+  'transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ' +
+  'disabled:cursor-not-allowed disabled:opacity-50 aria-disabled:cursor-not-allowed aria-disabled:opacity-50'
+
+const VARIANTS: Record<Variant, string> = {
+  primary: 'bg-brand text-white hover:bg-brand-dark aria-disabled:hover:bg-brand',
+  secondary: 'border border-gray-300 bg-white text-gray-800 hover:bg-gray-50',
+  ghost: 'text-gray-700 hover:bg-gray-100',
+  danger: 'border border-red-300 bg-white text-red-700 hover:bg-red-50',
+}
+
+// Minimum heights keep every button a comfortable touch target on phones.
+const SIZES: Record<Size, string> = {
+  sm: 'min-h-9 px-3 text-sm',
+  md: 'min-h-10 px-4 text-sm',
+}
+
+/** The one button style in the app; forwards every native <button> prop. */
+export function Button({
+  variant = 'secondary',
+  size = 'md',
+  type = 'button',
+  className = '',
+  ...rest
+}: ButtonProps) {
+  return (
+    <button type={type} className={`${BASE} ${VARIANTS[variant]} ${SIZES[size]} ${className}`} {...rest} />
+  )
+}

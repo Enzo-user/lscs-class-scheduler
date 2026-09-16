@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useReducer, type ReactNode } from 'react'
 import { ScheduleContext, type ScheduleContextValue } from './ScheduleContext'
 import { scheduleReducer } from './scheduleReducer'
 import { loadScheduleState, saveScheduleState } from './scheduleStorage'
@@ -11,16 +11,23 @@ export function ScheduleProvider({ children }: { children: ReactNode }) {
     saveScheduleState(state)
   }, [state])
 
-  // Memoised so consumers only re-render when the selection actually changes;
-  // `dispatch` is stable, so the callbacks are too.
+  // `dispatch` never changes, so these callbacks keep one identity for the
+  // life of the provider. That lets memoised list items (SectionItem) skip
+  // re-rendering when an unrelated course is added or removed.
+  const addSection = useCallback(
+    (courseId: string, sectionId: string) => dispatch({ type: 'ADD_SECTION', courseId, sectionId }),
+    [],
+  )
+  const removeCourse = useCallback(
+    (courseId: string) => dispatch({ type: 'REMOVE_COURSE', courseId }),
+    [],
+  )
+  const clear = useCallback(() => dispatch({ type: 'CLEAR' }), [])
+
+  // Memoised so consumers only re-render when the selection actually changes.
   const value = useMemo<ScheduleContextValue>(
-    () => ({
-      selected: state.selected,
-      addSection: (courseId, sectionId) => dispatch({ type: 'ADD_SECTION', courseId, sectionId }),
-      removeCourse: (courseId) => dispatch({ type: 'REMOVE_COURSE', courseId }),
-      clear: () => dispatch({ type: 'CLEAR' }),
-    }),
-    [state.selected],
+    () => ({ selected: state.selected, addSection, removeCourse, clear }),
+    [state.selected, addSection, removeCourse, clear],
   )
 
   return <ScheduleContext value={value}>{children}</ScheduleContext>
