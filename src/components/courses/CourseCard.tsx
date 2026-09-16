@@ -55,8 +55,9 @@ export const CourseCard = memo(function CourseCard({
         onClick={() => setExpandedOverride(!expanded)}
         className="flex w-full items-start justify-between gap-3 rounded-lg px-4 py-3 text-left hover:bg-gray-50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand"
       >
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
+        {/* Only phrasing content is valid inside a <button>, hence spans with block/flex rather than div/p. */}
+        <span className="block min-w-0">
+          <span className="flex flex-wrap items-center gap-2">
             <span className="font-semibold text-gray-900">{course.code}</span>
             <Badge>{course.units} {course.units === 1 ? 'unit' : 'units'}</Badge>
             {selectedSection && (
@@ -64,13 +65,13 @@ export const CourseCard = memo(function CourseCard({
                 <span aria-hidden="true">✓</span> {selectedSection.section} added
               </Badge>
             )}
-          </div>
-          <p className="mt-0.5 text-sm text-gray-700">{course.title}</p>
-          <p className="mt-0.5 text-xs text-gray-500">
+          </span>
+          <span className="mt-0.5 block text-sm text-gray-700">{course.title}</span>
+          <span className="mt-0.5 block text-xs text-gray-500">
             {course.sections.length} {course.sections.length === 1 ? 'section' : 'sections'}
             {hiddenCount > 0 && ` · ${sections.length} matching`}
-          </p>
-        </div>
+          </span>
+        </span>
         <span aria-hidden="true" className="mt-1 text-gray-400">
           {expanded ? '▴' : '▾'}
         </span>
