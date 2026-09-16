@@ -2,6 +2,7 @@
   "name": "lscs-class-scheduler",
   "private": true,
   "version": "0.0.0",
+  "description": "Class scheduling web app: browse courses and sections, build a personal schedule and view it as a weekly timetable (LSCS Frontend Engineering take-home).",
   "type": "module",
   "scripts": {
     "dev": "vite",
