@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { makeCourse, makeSection, slot } from '../test/fixtures'
 import {
   buildTimetable,
+  describeSchedule,
   findConflicts,
   resolveSelectedSections,
   sectionsConflict,
@@ -75,6 +76,16 @@ describe('totalUnits', () => {
   it('sums course units', () => {
     expect(totalUnits([makeCourse({ id: 'A', units: 3 }), makeCourse({ id: 'B', units: 1 })])).toBe(4)
     expect(totalUnits([])).toBe(0)
+  })
+})
+
+describe('describeSchedule', () => {
+  it('pluralises courses and units independently', () => {
+    const lab = { course: makeCourse({ id: 'LBYARCH', units: 1 }), section: makeSection({ id: 'LBYARCH-S11' }) }
+    const lecture = { course: makeCourse({ id: 'CCPROG3', units: 3 }), section: makeSection({ id: 'CCPROG3-S11' }) }
+    expect(describeSchedule([])).toBe('0 courses · 0 units')
+    expect(describeSchedule([lab])).toBe('1 course · 1 unit')
+    expect(describeSchedule([lab, lecture])).toBe('2 courses · 4 units')
   })
 })
 

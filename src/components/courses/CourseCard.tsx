@@ -1,4 +1,5 @@
 import { memo, useId, useState } from 'react'
+import { pluralize } from '../../lib/pluralize'
 import { findConflicts, type SelectedSection } from '../../lib/schedule'
 import type { Course, Section } from '../../types/course'
 import { Badge } from '../ui/Badge'
@@ -59,7 +60,7 @@ export const CourseCard = memo(function CourseCard({
         <span className="block min-w-0">
           <span className="flex flex-wrap items-center gap-2">
             <span className="font-semibold text-gray-900">{course.code}</span>
-            <Badge>{course.units} {course.units === 1 ? 'unit' : 'units'}</Badge>
+            <Badge>{pluralize(course.units, 'unit')}</Badge>
             {selectedSection && (
               <Badge tone="brand">
                 <span aria-hidden="true">✓</span> {selectedSection.section} added
@@ -68,7 +69,7 @@ export const CourseCard = memo(function CourseCard({
           </span>
           <span className="mt-0.5 block text-sm text-gray-700">{course.title}</span>
           <span className="mt-0.5 block text-xs text-gray-500">
-            {course.sections.length} {course.sections.length === 1 ? 'section' : 'sections'}
+            {pluralize(course.sections.length, 'section')}
             {hiddenCount > 0 && ` · ${sections.length} matching`}
           </span>
         </span>

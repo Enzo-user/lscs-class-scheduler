@@ -14,7 +14,7 @@ import { useCourses } from './hooks/useCourses'
 import { useDebouncedValue } from './hooks/useDebouncedValue'
 import { useToast } from './hooks/useToast'
 import { buildSearchIndex, filterCourses, type FilterState } from './lib/filter'
-import { totalUnits } from './lib/schedule'
+import { describeSchedule } from './lib/schedule'
 import { useSchedule } from './state/ScheduleContext'
 import { useSelectedSections } from './state/useSelectedSections'
 import type { Course, Day } from './types/course'
@@ -106,11 +106,10 @@ export function App() {
   }
 
   const loading = courses.status === 'loading'
-  const summary = `${entries.length} ${entries.length === 1 ? 'course' : 'courses'} · ${totalUnits(entries.map((e) => e.course))} units`
 
   return (
     <>
-      <AppHeader summary={loading ? undefined : summary} />
+      <AppHeader summary={loading ? undefined : describeSchedule(entries)} />
       <AppLayout
         scheduleCount={entries.length}
         browse={

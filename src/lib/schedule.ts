@@ -1,4 +1,5 @@
 import type { Course, ScheduleSlot, Section } from '../types/course'
+import { pluralize } from './pluralize'
 import { DAYS, formatTime, parseTime } from './time'
 
 /** A section the student has put on their schedule, resolved to its course. */
@@ -39,6 +40,12 @@ export function findConflicts(
 /** Sum of the units of the given courses. */
 export function totalUnits(courses: Course[]): number {
   return courses.reduce((sum, course) => sum + course.units, 0)
+}
+
+/** One-line totals for the header and the schedule pane, e.g. "3 courses · 9 units". */
+export function describeSchedule(entries: SelectedSection[]): string {
+  const units = totalUnits(entries.map((entry) => entry.course))
+  return `${pluralize(entries.length, 'course')} · ${pluralize(units, 'unit')}`
 }
 
 /**

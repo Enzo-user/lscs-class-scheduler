@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { courseColorClasses } from '../../lib/courseColor'
-import { totalUnits, type SelectedSection } from '../../lib/schedule'
+import { pluralize } from '../../lib/pluralize'
+import { describeSchedule, type SelectedSection } from '../../lib/schedule'
 import { formatSchedule } from '../../lib/time'
 import { Button } from '../ui/Button'
 import { EmptyState } from '../ui/EmptyState'
@@ -15,7 +16,6 @@ export interface ScheduleSummaryProps {
 export function ScheduleSummary({ entries, onRemove, onClear }: ScheduleSummaryProps) {
   // "Clear all" asks once before acting; nothing modal, just a swapped button pair.
   const [confirmingClear, setConfirmingClear] = useState(false)
-  const units = totalUnits(entries.map((entry) => entry.course))
 
   if (entries.length === 0) {
     return (
@@ -29,11 +29,7 @@ export function ScheduleSummary({ entries, onRemove, onClear }: ScheduleSummaryP
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-sm text-gray-700">
-          <span className="font-semibold text-gray-900">{entries.length}</span>{' '}
-          {entries.length === 1 ? 'course' : 'courses'} ·{' '}
-          <span className="font-semibold text-gray-900">{units}</span> units
-        </p>
+        <p className="text-sm font-medium text-gray-800">{describeSchedule(entries)}</p>
         {confirmingClear ? (
           <div className="flex items-center gap-2">
             <Button size="sm" variant="danger" onClick={() => { onClear(); setConfirmingClear(false) }}>
@@ -64,7 +60,7 @@ export function ScheduleSummary({ entries, onRemove, onClear }: ScheduleSummaryP
               <div className="min-w-0 text-sm">
                 <p className="font-semibold text-gray-900">
                   {course.code} {section.section}
-                  <span className="font-normal text-gray-600"> · {course.units} units</span>
+                  <span className="font-normal text-gray-600"> · {pluralize(course.units, 'unit')}</span>
                 </p>
                 <p className="text-gray-700">{section.instructor}</p>
                 <p className="text-gray-700">
