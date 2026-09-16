@@ -1,0 +1,2000 @@
+{
+  "courses": [
+    {
+      "id": "CCPROG1",
+      "code": "CCPROG1",
+      "title": "Logic Formulation and Introductory Programming",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CCPROG1-S11",
+          "section": "S11",
+          "instructor": "Katrina Ocampo",
+          "room": "Y602",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        },
+        {
+          "id": "CCPROG1-S12",
+          "section": "S12",
+          "instructor": "Ramon Reyes",
+          "room": "J213",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Friday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "CCPROG1-S13",
+          "section": "S13",
+          "instructor": "Emmanuel Torres",
+          "room": "LS306",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        },
+        {
+          "id": "CCPROG1-S14",
+          "section": "S14",
+          "instructor": "Althea Paredes",
+          "room": "GK305",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CCPROG2",
+      "code": "CCPROG2",
+      "title": "Programming with Structured Data Types",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CCPROG2-S11",
+          "section": "S11",
+          "instructor": "Ma. Lourdes Pineda",
+          "room": "LS306",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            }
+          ]
+        },
+        {
+          "id": "CCPROG2-S12",
+          "section": "S12",
+          "instructor": "Joaquin Magbanua",
+          "room": "LS208",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CCPROG3",
+      "code": "CCPROG3",
+      "title": "Object-Oriented Programming",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CCPROG3-S11",
+          "section": "S11",
+          "instructor": "Ana Marie Quisumbing",
+          "room": "GK302",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        },
+        {
+          "id": "CCPROG3-S12",
+          "section": "S12",
+          "instructor": "Ricardo Dela Cruz",
+          "room": "Y508",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CCDSTRU",
+      "code": "CCDSTRU",
+      "title": "Discrete Structures",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CCDSTRU-S11",
+          "section": "S11",
+          "instructor": "Antonio Pascual",
+          "room": "G306",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "CCDSTRU-S12",
+          "section": "S12",
+          "instructor": "Antonio Pascual",
+          "room": "SJ405",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Friday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CCDSALG",
+      "code": "CCDSALG",
+      "title": "Data Structures and Algorithms",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CCDSALG-S11",
+          "section": "S11",
+          "instructor": "Dominic Villareal",
+          "room": "G405",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        },
+        {
+          "id": "CCDSALG-S12",
+          "section": "S12",
+          "instructor": "Jose Aquino",
+          "room": "G304B",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        },
+        {
+          "id": "CCDSALG-S13",
+          "section": "S13",
+          "instructor": "Benedict Lacson",
+          "room": "Y509",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        },
+        {
+          "id": "CCDSALG-S14",
+          "section": "S14",
+          "instructor": "Maria Bautista",
+          "room": "G303",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Friday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CCICOMP",
+      "code": "CCICOMP",
+      "title": "Introduction to Computing",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CCICOMP-Y01",
+          "section": "Y01",
+          "instructor": "Patricia Santos",
+          "room": "SJ401",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "CCICOMP-Y02",
+          "section": "Y02",
+          "instructor": "Rosario Mendoza",
+          "room": "A1103",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CCINFOM",
+      "code": "CCINFOM",
+      "title": "Information Management",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CCINFOM-Y01",
+          "section": "Y01",
+          "instructor": "Jose Aquino",
+          "room": "M403",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        },
+        {
+          "id": "CCINFOM-Y02",
+          "section": "Y02",
+          "instructor": "Teresa Cruz",
+          "room": "LS210",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CCAPDEV",
+      "code": "CCAPDEV",
+      "title": "Web Application Development",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CCAPDEV-S11",
+          "section": "S11",
+          "instructor": "Angela Domingo",
+          "room": "V211",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        },
+        {
+          "id": "CCAPDEV-S12",
+          "section": "S12",
+          "instructor": "Antonio Pascual",
+          "room": "AG1905",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "CCAPDEV-S13",
+          "section": "S13",
+          "instructor": "Paolo Tan",
+          "room": "G301",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            }
+          ]
+        },
+        {
+          "id": "CCAPDEV-S14",
+          "section": "S14",
+          "instructor": "Paolo Tan",
+          "room": "G403",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSARCH1",
+      "code": "CSARCH1",
+      "title": "Introduction to Computer Organization and Architecture",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSARCH1-S11",
+          "section": "S11",
+          "instructor": "Emmanuel Torres",
+          "room": "J306",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        },
+        {
+          "id": "CSARCH1-S12",
+          "section": "S12",
+          "instructor": "Jose Aquino",
+          "room": "GK304",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        },
+        {
+          "id": "CSARCH1-S13",
+          "section": "S13",
+          "instructor": "Joanna Ignacio",
+          "room": "AG1904",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSARCH2",
+      "code": "CSARCH2",
+      "title": "Computer Organization and Architecture 2",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSARCH2-S11",
+          "section": "S11",
+          "instructor": "Rafael Abad",
+          "room": "G404",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        },
+        {
+          "id": "CSARCH2-S12",
+          "section": "S12",
+          "instructor": "Maria Bautista",
+          "room": "J213",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSOPESY",
+      "code": "CSOPESY",
+      "title": "Introduction to Operating Systems",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSOPESY-S11",
+          "section": "S11",
+          "instructor": "Teresa Cruz",
+          "room": "G304A",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        },
+        {
+          "id": "CSOPESY-S12",
+          "section": "S12",
+          "instructor": "Jose Aquino",
+          "room": "GK305",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            }
+          ]
+        },
+        {
+          "id": "CSOPESY-S13",
+          "section": "S13",
+          "instructor": "Althea Paredes",
+          "room": "AG1101",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            }
+          ]
+        },
+        {
+          "id": "CSOPESY-S14",
+          "section": "S14",
+          "instructor": "Miguel Ramos",
+          "room": "V303",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Friday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSNETWK",
+      "code": "CSNETWK",
+      "title": "Introduction to Computer Networks",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSNETWK-S11",
+          "section": "S11",
+          "instructor": "Cielo Dimaculangan",
+          "room": "AG1701",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "CSNETWK-S12",
+          "section": "S12",
+          "instructor": "Joanna Ignacio",
+          "room": "SJ405",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSSWENG",
+      "code": "CSSWENG",
+      "title": "Software Engineering",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSSWENG-Y01",
+          "section": "Y01",
+          "instructor": "Lourdes Castillo",
+          "room": "AG1701",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Friday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "CSSWENG-Y02",
+          "section": "Y02",
+          "instructor": "Ma. Lourdes Pineda",
+          "room": "G301",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSMODEL",
+      "code": "CSMODEL",
+      "title": "Modelling and Simulation",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSMODEL-S11",
+          "section": "S11",
+          "instructor": "Nathaniel Buenaventura",
+          "room": "Y509",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "CSMODEL-S12",
+          "section": "S12",
+          "instructor": "Gabriel Fernandez",
+          "room": "AG1905",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        },
+        {
+          "id": "CSMODEL-S13",
+          "section": "S13",
+          "instructor": "Carmela Alvarez",
+          "room": "AG1102",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSINTSY",
+      "code": "CSINTSY",
+      "title": "Introduction to Intelligent Systems",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSINTSY-Y01",
+          "section": "Y01",
+          "instructor": "Gabriel Fernandez",
+          "room": "GK304",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "CSINTSY-Y02",
+          "section": "Y02",
+          "instructor": "Bianca Soriano",
+          "room": "AG1905",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        },
+        {
+          "id": "CSINTSY-Y03",
+          "section": "Y03",
+          "instructor": "Teresa Cruz",
+          "room": "G404",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "CSINTSY-Y04",
+          "section": "Y04",
+          "instructor": "Clarisse Macaraeg",
+          "room": "Y602",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSALGCM",
+      "code": "CSALGCM",
+      "title": "Algorithms and Complexity",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSALGCM-Y01",
+          "section": "Y01",
+          "instructor": "Jun Carlos Tolentino",
+          "room": "J213",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        },
+        {
+          "id": "CSALGCM-Y02",
+          "section": "Y02",
+          "instructor": "Antonio Pascual",
+          "room": "G301",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "CSALGCM-Y03",
+          "section": "Y03",
+          "instructor": "Dominic Villareal",
+          "room": "Y602",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSSECDV",
+      "code": "CSSECDV",
+      "title": "Secure Web Development",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSSECDV-S11",
+          "section": "S11",
+          "instructor": "Miguel Ramos",
+          "room": "V303",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        },
+        {
+          "id": "CSSECDV-S12",
+          "section": "S12",
+          "instructor": "Joanna Ignacio",
+          "room": "V211",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "CSSECDV-S13",
+          "section": "S13",
+          "instructor": "Maria Bautista",
+          "room": "GK302",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSMATH1",
+      "code": "CSMATH1",
+      "title": "Mathematics for Computer Science 1",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSMATH1-S11",
+          "section": "S11",
+          "instructor": "Vicente Manalo",
+          "room": "AG1101",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Friday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "CSMATH1-S12",
+          "section": "S12",
+          "instructor": "Jun Carlos Tolentino",
+          "room": "G404",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Friday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        },
+        {
+          "id": "CSMATH1-S13",
+          "section": "S13",
+          "instructor": "Bianca Soriano",
+          "room": "A1103",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Friday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "CSMATH1-S14",
+          "section": "S14",
+          "instructor": "Patricia Santos",
+          "room": "V303",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSMATH2",
+      "code": "CSMATH2",
+      "title": "Mathematics for Computer Science 2",
+      "units": 3,
+      "sections": [
+        {
+          "id": "CSMATH2-S11",
+          "section": "S11",
+          "instructor": "Jose Aquino",
+          "room": "SJ405",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        },
+        {
+          "id": "CSMATH2-S12",
+          "section": "S12",
+          "instructor": "Vicente Manalo",
+          "room": "SJ405",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        },
+        {
+          "id": "CSMATH2-S13",
+          "section": "S13",
+          "instructor": "Jun Carlos Tolentino",
+          "room": "AG1701",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            },
+            {
+              "day": "Friday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            }
+          ]
+        },
+        {
+          "id": "CSMATH2-S14",
+          "section": "S14",
+          "instructor": "Joanna Ignacio",
+          "room": "G304B",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "STINTSY",
+      "code": "STINTSY",
+      "title": "Advanced Intelligent Systems",
+      "units": 3,
+      "sections": [
+        {
+          "id": "STINTSY-S11",
+          "section": "S11",
+          "instructor": "Francis Salazar",
+          "room": "A1103",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "STINTSY-S12",
+          "section": "S12",
+          "instructor": "Teresa Cruz",
+          "room": "AG1101",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Friday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "STDISCM",
+      "code": "STDISCM",
+      "title": "Distributed Computing",
+      "units": 3,
+      "sections": [
+        {
+          "id": "STDISCM-S11",
+          "section": "S11",
+          "instructor": "Vicente Manalo",
+          "room": "AG1101",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        },
+        {
+          "id": "STDISCM-S12",
+          "section": "S12",
+          "instructor": "Enrico Espiritu",
+          "room": "M304",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        },
+        {
+          "id": "STDISCM-S13",
+          "section": "S13",
+          "instructor": "Joanna Ignacio",
+          "room": "AG1904",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Friday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "STSWENG",
+      "code": "STSWENG",
+      "title": "Advanced Software Engineering",
+      "units": 3,
+      "sections": [
+        {
+          "id": "STSWENG-S11",
+          "section": "S11",
+          "instructor": "Ramon Reyes",
+          "room": "V211",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        },
+        {
+          "id": "STSWENG-S12",
+          "section": "S12",
+          "instructor": "Emmanuel Torres",
+          "room": "M403",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "STADVDB",
+      "code": "STADVDB",
+      "title": "Advanced Database Systems",
+      "units": 3,
+      "sections": [
+        {
+          "id": "STADVDB-Y01",
+          "section": "Y01",
+          "instructor": "Ricardo Dela Cruz",
+          "room": "G306",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        },
+        {
+          "id": "STADVDB-Y02",
+          "section": "Y02",
+          "instructor": "Cielo Dimaculangan",
+          "room": "G302",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        },
+        {
+          "id": "STADVDB-Y03",
+          "section": "Y03",
+          "instructor": "Danica Villanueva",
+          "room": "V211",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Friday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "STADVDB-Y04",
+          "section": "Y04",
+          "instructor": "Teresa Cruz",
+          "room": "GK302",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            },
+            {
+              "day": "Friday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "STCLOUD",
+      "code": "STCLOUD",
+      "title": "Cloud Computing",
+      "units": 3,
+      "sections": [
+        {
+          "id": "STCLOUD-Y01",
+          "section": "Y01",
+          "instructor": "Angela Domingo",
+          "room": "M304",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        },
+        {
+          "id": "STCLOUD-Y02",
+          "section": "Y02",
+          "instructor": "Maria Bautista",
+          "room": "SJ405",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        },
+        {
+          "id": "STCLOUD-Y03",
+          "section": "Y03",
+          "instructor": "Rosario Mendoza",
+          "room": "Y509",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "STHCIUX",
+      "code": "STHCIUX",
+      "title": "Human-Computer Interaction and User Experience",
+      "units": 3,
+      "sections": [
+        {
+          "id": "STHCIUX-S11",
+          "section": "S11",
+          "instructor": "Katrina Ocampo",
+          "room": "V303",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Friday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        },
+        {
+          "id": "STHCIUX-S12",
+          "section": "S12",
+          "instructor": "Rhea Mae Villaflor",
+          "room": "A1103",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "STHCIUX-S13",
+          "section": "S13",
+          "instructor": "Ricardo Dela Cruz",
+          "room": "AG1102",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MOBDEVE",
+      "code": "MOBDEVE",
+      "title": "Mobile Development",
+      "units": 3,
+      "sections": [
+        {
+          "id": "MOBDEVE-Y01",
+          "section": "Y01",
+          "instructor": "Ricardo Dela Cruz",
+          "room": "SJ401",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Friday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "MOBDEVE-Y02",
+          "section": "Y02",
+          "instructor": "Nathaniel Buenaventura",
+          "room": "G405",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "MOBDEVE-Y03",
+          "section": "Y03",
+          "instructor": "Dominic Villareal",
+          "room": "AG1904",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        },
+        {
+          "id": "MOBDEVE-Y04",
+          "section": "Y04",
+          "instructor": "Emmanuel Torres",
+          "room": "AG1701",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LBYARCH",
+      "code": "LBYARCH",
+      "title": "Computer Organization and Architecture Laboratory",
+      "units": 1,
+      "sections": [
+        {
+          "id": "LBYARCH-S11",
+          "section": "S11",
+          "instructor": "Francis Salazar",
+          "room": "G306",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "11:00",
+              "endTime": "14:00"
+            }
+          ]
+        },
+        {
+          "id": "LBYARCH-S12",
+          "section": "S12",
+          "instructor": "Francis Salazar",
+          "room": "G302A",
+          "schedule": [
+            {
+              "day": "Thursday",
+              "startTime": "18:00",
+              "endTime": "21:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LBYCPEI",
+      "code": "LBYCPEI",
+      "title": "Computer Engineering Laboratory",
+      "units": 1,
+      "sections": [
+        {
+          "id": "LBYCPEI-Y01",
+          "section": "Y01",
+          "instructor": "Danica Villanueva",
+          "room": "G304B",
+          "schedule": [
+            {
+              "day": "Saturday",
+              "startTime": "18:00",
+              "endTime": "21:00"
+            }
+          ]
+        },
+        {
+          "id": "LBYCPEI-Y02",
+          "section": "Y02",
+          "instructor": "Althea Paredes",
+          "room": "G302A",
+          "schedule": [
+            {
+              "day": "Thursday",
+              "startTime": "14:30",
+              "endTime": "17:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PERSEF1",
+      "code": "PERSEF1",
+      "title": "Personal Effectiveness 1",
+      "units": 2,
+      "sections": [
+        {
+          "id": "PERSEF1-S11",
+          "section": "S11",
+          "instructor": "Katrina Ocampo",
+          "room": "Y509",
+          "schedule": [
+            {
+              "day": "Saturday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            }
+          ]
+        },
+        {
+          "id": "PERSEF1-S12",
+          "section": "S12",
+          "instructor": "Rosario Mendoza",
+          "room": "SJ405",
+          "schedule": [
+            {
+              "day": "Thursday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        },
+        {
+          "id": "PERSEF1-S13",
+          "section": "S13",
+          "instructor": "Rosario Mendoza",
+          "room": "LS210",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "PERSEF1-S14",
+          "section": "S14",
+          "instructor": "Isabel Navarro",
+          "room": "G302",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GEMATMW",
+      "code": "GEMATMW",
+      "title": "Mathematics in the Modern World",
+      "units": 3,
+      "sections": [
+        {
+          "id": "GEMATMW-Y01",
+          "section": "Y01",
+          "instructor": "Danica Villanueva",
+          "room": "M304",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Friday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "GEMATMW-Y02",
+          "section": "Y02",
+          "instructor": "Enrico Espiritu",
+          "room": "GK304",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "GEMATMW-Y03",
+          "section": "Y03",
+          "instructor": "Maria Bautista",
+          "room": "AG1101",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GEETHIC",
+      "code": "GEETHIC",
+      "title": "Ethics",
+      "units": 3,
+      "sections": [
+        {
+          "id": "GEETHIC-S11",
+          "section": "S11",
+          "instructor": "Bianca Soriano",
+          "room": "LS210",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "GEETHIC-S12",
+          "section": "S12",
+          "instructor": "Miguel Ramos",
+          "room": "J306",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "18:00",
+              "endTime": "19:30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GERIZAL",
+      "code": "GERIZAL",
+      "title": "Life and Works of Rizal",
+      "units": 3,
+      "sections": [
+        {
+          "id": "GERIZAL-S11",
+          "section": "S11",
+          "instructor": "Joaquin Magbanua",
+          "room": "Y602",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "14:30",
+              "endTime": "16:00"
+            }
+          ]
+        },
+        {
+          "id": "GERIZAL-S12",
+          "section": "S12",
+          "instructor": "Joaquin Magbanua",
+          "room": "LS208",
+          "schedule": [
+            {
+              "day": "Monday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Thursday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        },
+        {
+          "id": "GERIZAL-S13",
+          "section": "S13",
+          "instructor": "Althea Paredes",
+          "room": "G304B",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Friday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GEUSELF",
+      "code": "GEUSELF",
+      "title": "Understanding the Self",
+      "units": 3,
+      "sections": [
+        {
+          "id": "GEUSELF-S11",
+          "section": "S11",
+          "instructor": "Jose Aquino",
+          "room": "G403",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "16:15",
+              "endTime": "17:45"
+            }
+          ]
+        },
+        {
+          "id": "GEUSELF-S12",
+          "section": "S12",
+          "instructor": "Angela Domingo",
+          "room": "AG1905",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            },
+            {
+              "day": "Friday",
+              "startTime": "09:15",
+              "endTime": "10:45"
+            }
+          ]
+        },
+        {
+          "id": "GEUSELF-S13",
+          "section": "S13",
+          "instructor": "Francis Salazar",
+          "room": "Y509",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            },
+            {
+              "day": "Friday",
+              "startTime": "12:45",
+              "endTime": "14:15"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LCLSONE",
+      "code": "LCLSONE",
+      "title": "Lasallian Studies 1",
+      "units": 3,
+      "sections": [
+        {
+          "id": "LCLSONE-S11",
+          "section": "S11",
+          "instructor": "Antonio Pascual",
+          "room": "G302",
+          "schedule": [
+            {
+              "day": "Wednesday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            },
+            {
+              "day": "Saturday",
+              "startTime": "07:30",
+              "endTime": "09:00"
+            }
+          ]
+        },
+        {
+          "id": "LCLSONE-S12",
+          "section": "S12",
+          "instructor": "Isabel Navarro",
+          "room": "AG1701",
+          "schedule": [
+            {
+              "day": "Tuesday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            },
+            {
+              "day": "Friday",
+              "startTime": "11:00",
+              "endTime": "12:30"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
