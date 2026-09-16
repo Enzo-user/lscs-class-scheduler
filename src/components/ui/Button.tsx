@@ -21,9 +21,10 @@ const VARIANTS: Record<ButtonVariant, string> = {
   danger: 'border border-red-300 bg-white text-red-700 hover:bg-red-50',
 }
 
-// Minimum heights keep every button a comfortable touch target on phones.
+// Minimum heights keep every button a comfortable touch target: 40px on
+// phones, where the small size may shrink to 36px once a pointer is likely.
 const SIZES: Record<Size, string> = {
-  sm: 'min-h-9 px-3 text-sm',
+  sm: 'min-h-10 px-3 text-sm sm:min-h-9',
   md: 'min-h-10 px-4 text-sm',
 }
 

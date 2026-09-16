@@ -32,11 +32,11 @@ export function CourseFilters({ days, onToggleDay, units, unitOptions, onUnitsCh
                 type="button"
                 aria-pressed={active}
                 onClick={() => onToggleDay(day)}
-                className={`min-h-9 rounded-full border px-3 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
+                className={`min-h-10 rounded-full border px-3 text-sm font-medium transition-colors sm:min-h-9 ${
                   active
                     ? 'border-brand bg-brand text-white'
                     : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-                }`}
+                } focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand`}
               >
                 {abbreviateDay(day)}
               </button>
@@ -53,7 +53,10 @@ export function CourseFilters({ days, onToggleDay, units, unitOptions, onUnitsCh
           id={unitsId}
           value={units ?? ''}
           onChange={(event) => onUnitsChange(event.target.value === '' ? null : Number(event.target.value))}
-          className="mt-1 min-h-9 rounded-md border border-gray-300 bg-white px-2 text-sm focus:outline-2 focus:outline-offset-1 focus:outline-brand"
+          className={
+            'mt-1 min-h-10 rounded-md border border-gray-300 bg-white px-2 text-sm sm:min-h-9 ' +
+            'focus:outline-2 focus:outline-offset-1 focus:outline-brand'
+          }
         >
           <option value="">Any</option>
           {unitOptions.map((option) => (
