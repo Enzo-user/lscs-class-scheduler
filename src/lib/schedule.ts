@@ -12,7 +12,7 @@ export interface SelectedSection {
  * True when two meetings share a day and their time ranges overlap.
  * Touching ranges (09:00 end, 09:00 start) do not overlap.
  */
-export function slotsOverlap(a: ScheduleSlot, b: ScheduleSlot): boolean {
+function slotsOverlap(a: ScheduleSlot, b: ScheduleSlot): boolean {
   if (a.day !== b.day) return false
   return (
     parseTime(a.startTime) < parseTime(b.endTime) && parseTime(b.startTime) < parseTime(a.endTime)
@@ -20,7 +20,7 @@ export function slotsOverlap(a: ScheduleSlot, b: ScheduleSlot): boolean {
 }
 
 /** True when any meeting of `a` overlaps any meeting of `b`. */
-export function sectionsConflict(a: Section, b: Section): boolean {
+function sectionsConflict(a: Section, b: Section): boolean {
   return a.schedule.some((slotA) => b.schedule.some((slotB) => slotsOverlap(slotA, slotB)))
 }
 
@@ -29,10 +29,7 @@ export function sectionsConflict(a: Section, b: Section): boolean {
  * candidate's own course are skipped because picking the candidate would
  * replace them rather than sit alongside them.
  */
-export function findConflicts(
-  candidate: SelectedSection,
-  selected: SelectedSection[],
-): SelectedSection[] {
+function findConflicts(candidate: SelectedSection, selected: SelectedSection[]): SelectedSection[] {
   return selected.filter(
     (entry) =>
       entry.course.id !== candidate.course.id && sectionsConflict(entry.section, candidate.section),
@@ -47,7 +44,7 @@ export function describeConflicts(candidate: SelectedSection, selected: Selected
 }
 
 /** Sum of the units of the given courses. */
-export function totalUnits(courses: Course[]): number {
+function totalUnits(courses: Course[]): number {
   return courses.reduce((sum, course) => sum + course.units, 0)
 }
 

@@ -1,104 +1,71 @@
 import { describe, expect, it } from 'vitest'
 import { makeCourse, makeSection, slot } from '../test/fixtures'
+import type { ScheduleSlot } from '../types/course'
 import {
   buildTimetable,
   describeConflicts,
   describeSchedule,
-  findConflicts,
   resolveSelectedSections,
-  sectionsConflict,
-  slotsOverlap,
-  totalUnits,
+  type SelectedSection,
 } from './schedule'
 
-describe('slotsOverlap', () => {
-  it('detects partial and full overlaps on the same day', () => {
-    expect(slotsOverlap(slot('Monday', '09:15', '10:45'), slot('Monday', '10:00', '11:30'))).toBe(
-      true,
-    )
-    expect(slotsOverlap(slot('Monday', '09:00', '12:00'), slot('Monday', '10:00', '10:30'))).toBe(
-      true,
-    )
-  })
-
-  it('treats touching intervals as free', () => {
-    expect(slotsOverlap(slot('Monday', '07:30', '09:00'), slot('Monday', '09:00', '10:30'))).toBe(
-      false,
-    )
-  })
-
-  it('never overlaps across different days', () => {
-    expect(slotsOverlap(slot('Monday', '09:15', '10:45'), slot('Tuesday', '09:15', '10:45'))).toBe(
-      false,
-    )
-  })
-})
-
-describe('sectionsConflict', () => {
-  it('conflicts when any meeting overlaps', () => {
-    const a = makeSection({
-      id: 'A-S11',
-      schedule: [slot('Monday', '09:15', '10:45'), slot('Thursday', '09:15', '10:45')],
-    })
-    const b = makeSection({ id: 'B-S11', schedule: [slot('Thursday', '10:00', '11:30')] })
-    expect(sectionsConflict(a, b)).toBe(true)
-  })
-
-  it('does not conflict when all meetings are apart', () => {
-    const a = makeSection({ id: 'A-S11', schedule: [slot('Monday', '09:15', '10:45')] })
-    const b = makeSection({ id: 'B-S11', schedule: [slot('Monday', '11:00', '12:30')] })
-    expect(sectionsConflict(a, b)).toBe(false)
-  })
-})
-
-describe('findConflicts', () => {
+describe('describeConflicts', () => {
   const prog = makeCourse({
     id: 'CCPROG3',
     sections: [
-      makeSection({ id: 'CCPROG3-S11', schedule: [slot('Monday', '09:15', '10:45')] }),
-      makeSection({ id: 'CCPROG3-S12', schedule: [slot('Monday', '11:00', '12:30')] }),
+      makeSection({
+        id: 'CCPROG3-S11',
+        schedule: [slot('Monday', '09:15', '10:45'), slot('Thursday', '09:15', '10:45')],
+      }),
     ],
   })
-  const dstru = makeCourse({
-    id: 'CCDSTRU',
-    sections: [makeSection({ id: 'CCDSTRU-S11', schedule: [slot('Monday', '10:00', '11:30')] })],
-  })
-  const [progS11, progS12] = prog.sections
-  const [dstruS11] = dstru.sections
-  if (!progS11 || !progS12 || !dstruS11) throw new Error('fixture setup')
+  const [progS11] = prog.sections
+  if (!progS11) throw new Error('fixture setup')
+  const candidate = { course: prog, section: progS11 }
 
-  it('returns the selected sections of other courses that overlap', () => {
-    const selected = [{ course: dstru, section: dstruS11 }]
-    expect(findConflicts({ course: prog, section: progS11 }, selected)).toEqual(selected)
-    expect(findConflicts({ course: prog, section: progS12 }, selected)).toEqual(selected)
+  /** A selected S11 of another course that meets at the given times. */
+  function selected(courseId: string, meetings: ScheduleSlot[]): SelectedSection {
+    const section = makeSection({ id: `${courseId}-S11`, schedule: meetings })
+    return { course: makeCourse({ id: courseId, sections: [section] }), section }
+  }
+
+  it('names a selection whose meeting overlaps any meeting of the candidate', () => {
+    const partial = selected('CCDSTRU', [slot('Monday', '10:00', '11:30')])
+    const enclosing = selected('CCDSTRU', [slot('Thursday', '09:00', '12:00')])
+    expect(describeConflicts(candidate, [partial])).toBe('CCDSTRU S11')
+    expect(describeConflicts(candidate, [enclosing])).toBe('CCDSTRU S11')
+  })
+
+  it('treats touching intervals as free', () => {
+    const before = selected('CCDSTRU', [slot('Monday', '07:45', '09:15')])
+    const after = selected('CCDSTRU', [slot('Monday', '10:45', '12:15')])
+    expect(describeConflicts(candidate, [before, after])).toBe('')
+  })
+
+  it('never conflicts across different days', () => {
+    const sameTimeTuesday = selected('CCDSTRU', [slot('Tuesday', '09:15', '10:45')])
+    expect(describeConflicts(candidate, [sameTimeTuesday])).toBe('')
+  })
+
+  it('lists every clashing selection as "CODE SECTION" pairs, in schedule order', () => {
+    const entries = [
+      selected('CCDSTRU', [slot('Monday', '10:00', '11:30')]),
+      selected('GEMATMW', [slot('Monday', '13:00', '14:30')]),
+      selected('CSARCH1', [slot('Thursday', '10:00', '11:30')]),
+    ]
+    expect(describeConflicts(candidate, entries)).toBe('CCDSTRU S11, CSARCH1 S11')
   })
 
   it('ignores sections of the same course because they would be replaced', () => {
-    const selected = [{ course: prog, section: progS11 }]
     const overlapping = makeSection({
       id: 'CCPROG3-S13',
       schedule: [slot('Monday', '09:15', '10:45')],
     })
-    expect(findConflicts({ course: prog, section: overlapping }, selected)).toEqual([])
+    expect(describeConflicts({ course: prog, section: overlapping }, [candidate])).toBe('')
   })
 
   it('returns nothing when the schedule is empty', () => {
-    expect(findConflicts({ course: prog, section: progS11 }, [])).toEqual([])
-  })
-
-  it('describes the clashing selections as "CODE SECTION" pairs', () => {
-    const selected = [{ course: dstru, section: dstruS11 }]
-    expect(describeConflicts({ course: prog, section: progS11 }, selected)).toBe('CCDSTRU S11')
-    expect(describeConflicts({ course: prog, section: progS11 }, [])).toBe('')
-  })
-})
-
-describe('totalUnits', () => {
-  it('sums course units', () => {
-    expect(totalUnits([makeCourse({ id: 'A', units: 3 }), makeCourse({ id: 'B', units: 1 })])).toBe(
-      4,
-    )
-    expect(totalUnits([])).toBe(0)
+    expect(describeConflicts(candidate, [])).toBe('')
   })
 })
 
