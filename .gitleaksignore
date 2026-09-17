@@ -1,0 +1,7 @@
+# Test fixture keys ("A-S11-Thursday", a section id plus a day) that gitleaks'
+# generic-api-key rule flags because they follow `key:`. They are not secrets.
+# The first fingerprint is for `gitleaks dir` (current file), the others for
+# `gitleaks git` (the two commits that touched the line).
+src/lib/schedule.test.ts:generic-api-key:129
+36823b8041e1b35630e7cf1d0d809799c3d93f8e:src/lib/schedule.test.ts:generic-api-key:162
+c2a4d575b379a731d29bb97a073d5535e55b9340:src/lib/schedule.test.ts:generic-api-key:111
