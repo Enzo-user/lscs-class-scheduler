@@ -22,7 +22,7 @@ Extensions I implemented because they were small and made the required features 
 
 ## Getting started
 
-Prerequisites: **Node 22.22.2 or newer** (or Node 24.15+) and npm. `.nvmrc` says `22`, and `package.json` declares `"engines": { "node": "^22.22.2 || ^24.15.0 || >=26.0.0" }`, which mirrors the strictest dependency (jsdom 30) exactly, so a Node that satisfies it installs without a single engine warning. I developed on Node 22.23 and also ran the full suite on Node 24.21. Node 20 is not enough: `npm run dev` and `npm run build` happen to work on 20.19+ (Vite's own minimum), but Vitest 5 and jsdom 30 (the test runner and its DOM) refuse it, so `npm test` fails there.
+Prerequisites: **Node 22.22.2+ or Node 24.15+** (the even-numbered LTS lines) and npm. `.nvmrc` says `22`, and `package.json` declares `"engines": { "node": "^22.22.2 || ^24.15.0 || >=26.0.0" }`, which mirrors the strictest dependency (jsdom 30) exactly, so a Node that satisfies it installs without a single engine warning. I developed on Node 22.23 and also ran the full suite on Node 24.21. Node 20 is not enough: `npm run dev` and `npm run build` happen to work on 20.19+ (Vite's own minimum), but Vitest 5 and jsdom 30 (the test runner and its DOM) refuse it, so `npm test` fails there.
 
 ```bash
 git clone https://github.com/Enzo-user/lscs-class-scheduler.git
