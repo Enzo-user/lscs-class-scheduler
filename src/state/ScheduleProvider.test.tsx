@@ -1,15 +1,19 @@
 import { act, renderHook } from '@testing-library/react'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { makeCourse } from '../test/fixtures'
 import { ScheduleProvider } from './ScheduleProvider'
 import { useSchedule } from './ScheduleContext'
-import { SCHEDULE_STORAGE_KEY } from './scheduleStorage'
+import { loadScheduleState, saveScheduleState } from './scheduleStorage'
 import { useSelectedSections } from './useSelectedSections'
 
 const wrapper = ScheduleProvider
 
 beforeEach(() => {
   localStorage.clear()
+})
+
+afterEach(() => {
+  vi.restoreAllMocks()
 })
 
 describe('ScheduleProvider', () => {
@@ -33,25 +37,27 @@ describe('ScheduleProvider', () => {
     expect(result.current.selected).toEqual({})
   })
 
-  it('persists the selection to localStorage under the versioned key', () => {
+  it('persists every change to localStorage', () => {
     const { result } = renderHook(() => useSchedule(), { wrapper })
     act(() => result.current.addSection('CCPROG3', 'CCPROG3-S11'))
-    expect(JSON.parse(localStorage.getItem(SCHEDULE_STORAGE_KEY) ?? 'null')).toEqual({
-      CCPROG3: 'CCPROG3-S11',
-    })
+    expect(loadScheduleState()).toEqual({ selected: { CCPROG3: 'CCPROG3-S11' } })
+    expect(localStorage.length).toBe(1)
   })
 
   it('restores a persisted selection on mount', () => {
-    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify({ CCPROG3: 'CCPROG3-S11' }))
+    saveScheduleState({ selected: { CCPROG3: 'CCPROG3-S11' } })
     const { result } = renderHook(() => useSchedule(), { wrapper })
     expect(result.current.selected).toEqual({ CCPROG3: 'CCPROG3-S11' })
   })
 
   it('ignores corrupt or wrongly shaped persisted data', () => {
-    localStorage.setItem(SCHEDULE_STORAGE_KEY, '{not json')
+    // Whatever key the module uses, garbage stored under it must not break the provider.
+    const getItem = vi.spyOn(Storage.prototype, 'getItem')
+
+    getItem.mockReturnValue('{not json')
     expect(renderHook(() => useSchedule(), { wrapper }).result.current.selected).toEqual({})
 
-    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(['CCPROG3-S11']))
+    getItem.mockReturnValue(JSON.stringify(['CCPROG3-S11']))
     expect(renderHook(() => useSchedule(), { wrapper }).result.current.selected).toEqual({})
   })
 

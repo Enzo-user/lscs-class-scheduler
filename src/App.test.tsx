@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { App } from './App'
 import { ApiError, getCourses } from './api/coursesApi'
 import { ScheduleProvider } from './state/ScheduleProvider'
-import { SCHEDULE_STORAGE_KEY } from './state/scheduleStorage'
+import { saveScheduleState } from './state/scheduleStorage'
 import { makeCourse, makeSection, slot } from './test/fixtures'
 
 vi.mock('./api/coursesApi', async (importOriginal) => ({
@@ -183,10 +183,7 @@ describe('App', () => {
 
   it('flags a restored selection that clashes with another entry', async () => {
     // Only reachable through stale storage: the UI blocks conflicting adds.
-    localStorage.setItem(
-      SCHEDULE_STORAGE_KEY,
-      JSON.stringify({ CCPROG3: 'CCPROG3-S11', CSARCH1: 'CSARCH1-S11' }),
-    )
+    saveScheduleState({ selected: { CCPROG3: 'CCPROG3-S11', CSARCH1: 'CSARCH1-S11' } })
     renderApp()
     await loadCatalogue()
 

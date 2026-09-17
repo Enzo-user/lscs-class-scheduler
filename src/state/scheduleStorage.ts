@@ -1,7 +1,7 @@
 import { initialScheduleState, type ScheduleState } from './scheduleReducer'
 
 /** Bump the suffix if the persisted shape ever changes; old data is then ignored. */
-export const SCHEDULE_STORAGE_KEY = 'lscs-class-scheduler:schedule:v1'
+const SCHEDULE_STORAGE_KEY = 'lscs-class-scheduler:schedule:v1'
 
 /** Reads the persisted schedule, falling back to an empty one on any problem. */
 export function loadScheduleState(): ScheduleState {
