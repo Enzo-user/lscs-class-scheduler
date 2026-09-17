@@ -124,9 +124,16 @@ describe('App', () => {
     expect(within(panel).getAllByText('9:15–10:45 AM')).toHaveLength(2)
     expect(screen.getByText('Added CCPROG3 S11')).toBeInTheDocument()
     expect(screen.getByText('S11 added')).toBeInTheDocument()
+    // On desktop the list sits under the timetable, so the timetable heading links to it.
+    const heading = within(panel).getByRole('heading', { name: 'Selected sections' })
+    expect(within(panel).getByRole('link', { name: 'Selected sections (1)' })).toHaveAttribute(
+      'href',
+      `#${heading.id}`,
+    )
 
     await user.click(within(panel).getByRole('button', { name: 'Remove CCPROG3 S11' }))
     expect(within(panel).getByText('No sections yet')).toBeInTheDocument()
+    expect(within(panel).queryByRole('link')).not.toBeInTheDocument()
     expect(screen.queryByText('9:15–10:45 AM')).not.toBeInTheDocument()
     // The Remove button is gone, so focus lands on the list heading instead of <body>.
     expect(within(panel).getByRole('heading', { name: 'Selected sections' })).toHaveFocus()

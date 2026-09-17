@@ -52,7 +52,7 @@ The API module adds a 500 ms artificial delay to every request so the skeleton l
 http://localhost:5173/?mockError=1
 ```
 
-The request then fails with a simulated 500 after the delay and the page shows the error panel with a Retry button. Both switches live in `src/api/coursesApi.ts` and are meant to be deleted together with the mock data.
+The request then fails with a simulated 500 after the delay and the page shows the error panel with a Retry button. Retry re-runs the request and fails again for as long as the parameter is in the URL (the message says so); remove `?mockError=1` from the address bar and press Enter to see the catalogue load again. Both switches live in `src/api/coursesApi.ts` and are meant to be deleted together with the mock data.
 
 ### Pointing the app at a real API
 

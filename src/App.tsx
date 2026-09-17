@@ -6,7 +6,7 @@ import { CourseSearch } from './components/courses/CourseSearch'
 import { AppHeader } from './components/layout/AppHeader'
 import { AppLayout } from './components/layout/AppLayout'
 import { ScheduleSkeleton } from './components/schedule/ScheduleSkeleton'
-import { ScheduleSummary } from './components/schedule/ScheduleSummary'
+import { SELECTED_SECTIONS_ID, ScheduleSummary } from './components/schedule/ScheduleSummary'
 import { Timetable } from './components/schedule/Timetable'
 import { ErrorState } from './components/ui/ErrorState'
 import { Toast } from './components/ui/Toast'
@@ -159,7 +159,18 @@ export function App() {
                   on, so it goes first; on a phone the list stays first because the grid
                   scrolls sideways and would push everything below the fold. */}
               <div className="lg:order-first">
-                <h3 className="mb-2 text-sm font-semibold text-gray-800">Weekly timetable</h3>
+                <div className="mb-2 flex items-baseline justify-between gap-3">
+                  <h3 className="text-sm font-semibold text-gray-800">Weekly timetable</h3>
+                  {/* The list sits under a tall grid on desktop, so say it is there. */}
+                  {entries.length > 0 && (
+                    <a
+                      href={`#${SELECTED_SECTIONS_ID}`}
+                      className="hidden rounded text-sm font-medium text-brand-dark hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:inline"
+                    >
+                      Selected sections ({entries.length})<span aria-hidden="true"> ↓</span>
+                    </a>
+                  )}
+                </div>
                 <Timetable entries={entries} />
               </div>
             </div>

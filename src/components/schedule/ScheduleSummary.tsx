@@ -1,10 +1,16 @@
-import { useId, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { courseColorClasses } from '../../lib/courseColor'
 import { pluralize } from '../../lib/pluralize'
 import { describeConflicts, describeSchedule, type SelectedSection } from '../../lib/schedule'
 import { formatSchedule } from '../../lib/time'
 import { Button } from '../ui/Button'
 import { EmptyState } from '../ui/EmptyState'
+
+/**
+ * Id of the "Selected sections" heading, fixed (not `useId`) so the desktop
+ * timetable can link down to the list with a plain fragment link.
+ */
+export const SELECTED_SECTIONS_ID = 'selected-sections'
 
 export interface ScheduleSummaryProps {
   entries: SelectedSection[]
@@ -17,7 +23,6 @@ export function ScheduleSummary({ entries, onRemove, onClear }: ScheduleSummaryP
   // "Clear all" asks once before acting: the same button becomes "Yes, clear all"
   // (so focus stays on it) and a Cancel button appears next to it.
   const [confirmingClear, setConfirmingClear] = useState(false)
-  const headingId = useId()
   // Remove and Clear unmount the button that was pressed, which would drop
   // focus to <body>. Focus moves to the list heading instead, and Cancel hands
   // it back to the Clear all button.
@@ -41,7 +46,7 @@ export function ScheduleSummary({ entries, onRemove, onClear }: ScheduleSummaryP
   return (
     <div>
       <h3
-        id={headingId}
+        id={SELECTED_SECTIONS_ID}
         ref={headingRef}
         tabIndex={-1}
         className="mb-2 rounded text-sm font-semibold text-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
@@ -75,7 +80,7 @@ export function ScheduleSummary({ entries, onRemove, onClear }: ScheduleSummaryP
             </div>
           </div>
 
-          <ul aria-labelledby={headingId} className="mt-3 flex flex-col gap-2">
+          <ul aria-labelledby={SELECTED_SECTIONS_ID} className="mt-3 flex flex-col gap-2">
             {entries.map(({ course, section }) => {
               // Only a stale saved selection can clash (the UI blocks conflicting adds),
               // but when it does the timetable draws the blocks on top of each other,

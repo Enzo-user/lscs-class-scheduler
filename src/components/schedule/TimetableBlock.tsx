@@ -12,7 +12,7 @@ export function TimetableBlock({ block }: TimetableBlockProps) {
   return (
     <div
       className={
-        'z-10 m-px flex min-w-0 flex-col overflow-hidden rounded border-l-4 px-1.5 py-1 text-[11px] leading-tight ' +
+        'z-10 m-px flex min-w-0 flex-col overflow-hidden rounded border-l-4 px-1.5 py-0.5 text-[11px] leading-[1.2] ' +
         courseColorClasses(course.id)
       }
       style={{

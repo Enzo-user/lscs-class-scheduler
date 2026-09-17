@@ -7,8 +7,12 @@ export interface TimetableProps {
   entries: SelectedSection[]
 }
 
-/** One 15-minute grid row in rem, so an hour is 3rem and a 1.5h class is 4.5rem tall. */
-const ROW_HEIGHT_REM = 0.75
+/**
+ * One 15-minute grid row in rem: an hour is 2rem and a 1.5h class is 3rem tall.
+ * Small enough that the whole 07:00–21:00 window plus the list heading below
+ * it fit an 800px-tall desktop viewport without scrolling the pane.
+ */
+const ROW_HEIGHT_REM = 0.5
 
 /**
  * Weekly grid, Monday to Saturday. Column 1 is the time gutter, row 1 the
