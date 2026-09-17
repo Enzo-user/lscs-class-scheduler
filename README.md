@@ -2,8 +2,6 @@
 
 A small class-scheduling web app for the LSCS Frontend Engineering take-home. Students browse a course catalogue, search and filter it, add one section per course to a personal schedule, swap or remove sections, and see the result as a Monday-to-Saturday timetable. The catalogue is mock data served as a static JSON file behind a thin API module, so a real backend can be plugged in by setting one environment variable. There is no hosted deployment; the app runs locally with the commands below.
 
-Repository: https://github.com/Enzo-user/lscs-class-scheduler
-
 ## Features
 
 Required by the brief:
@@ -20,18 +18,20 @@ Extensions I implemented because they were small and made the required features 
 - **Persistence.** The selection is saved to `localStorage` under a versioned key and restored on reload; corrupt or stale entries are ignored.
 - **Keyboard and screen-reader support.** Semantic landmarks and headings, labelled inputs, `aria-pressed` toggles, `aria-expanded` card headers, visible focus rings, live regions for loading, results and toasts, and an `sr-only` course name on every Add/Remove button. Focus is never dropped: a section's Add button turns into its Remove button in place, and after removing from the schedule list or clearing it, focus moves to the "Selected sections" heading.
 - **Loading, empty and error states** for the catalogue, the filtered list and the schedule, with a retry button on errors.
-- **Tests.** 74 Vitest tests across 12 files covering the domain functions, reducer, provider persistence, API client, hooks and the UI end to end.
+- **Tests.** 70 Vitest tests across 12 files covering the domain functions, reducer, provider persistence, API client, hooks and the UI end to end.
 
 ## Getting started
 
 Prerequisites: Node 22 or newer and npm.
 
 ```bash
-git clone https://github.com/Enzo-user/lscs-class-scheduler.git
+git clone <repository-url> lscs-class-scheduler
 cd lscs-class-scheduler
 npm install
 npm run dev        # http://localhost:5173
 ```
+
+`<repository-url>` is the link in the submission email; the second `git clone` argument only fixes the folder name.
 
 Other scripts:
 
@@ -151,7 +151,7 @@ On conflicts: the brief says the mock data may be assumed conflict-free and that
 
 **Data layer: `api/coursesApi.ts` + `hooks/useCourses.ts`.** Components never call `fetch`; they call `useCourses()` and get a discriminated union (`loading | success | error`) plus `refetch`. The API module owns the base URL (`VITE_API_BASE_URL`, defaulting to the static file), the simulated latency and the mock error switch, and validates the payload. Swapping in a real backend is an environment variable, and deleting the mock behaviour is two constants in one file. The trade-off of hand-written type guards over a schema library like zod is a few more lines in exchange for one less dependency.
 
-**Domain logic in pure functions (`src/lib/`).** Overlap detection, conflict lookup, filtering, the search index, timetable row/column layout and time formatting are plain TypeScript with no React imports. They are the easiest code to test (over half of the 74 tests target them and the reducer) and the easiest to explain: `slotsOverlap` is one comparison, `buildTimetable` turns entries into `gridRow`/`gridColumn` numbers so the `Timetable` component only places boxes.
+**Domain logic in pure functions (`src/lib/`).** Overlap detection, conflict lookup, filtering, the search index, timetable row/column layout and time formatting are plain TypeScript with no React imports. They are the easiest code to test (over half of the 70 tests target them and the reducer) and the easiest to explain: `slotsOverlap` is one comparison, `buildTimetable` turns entries into `gridRow`/`gridColumn` numbers so the `Timetable` component only places boxes.
 
 **Tooling.** TypeScript runs with `strict` and `noUncheckedIndexedAccess` set explicitly in `tsconfig.app.json`, so every array index read is `T | undefined` and the fallbacks in the code are checked rather than decorative. oxlint enforces `react/rules-of-hooks` and `react/exhaustive-deps`, so a wrong dependency array fails `npm run lint`. oxfmt (same project as oxlint) formats the source at 100 columns; `npm run format:check` verifies it. The three tools together add one dev dependency beyond the Vite scaffold's defaults.
 
@@ -171,7 +171,7 @@ At 10,000 courses the plain `<ul>` would be the bottleneck; `CourseList` marks w
 
 **Loading, empty and error states.** `useCourses` exposes a three-state union so `App` cannot render data that is not there. Loading shows card and schedule skeletons plus an `sr-only` "Loading courses…"; the filtered list distinguishes "No courses match" (with a Clear filters button) from a genuinely empty catalogue; the schedule shows "No sections yet" and an overlay on the empty timetable; errors render the message with a Retry button that aborts any in-flight request and refetches.
 
-**Testing.** Vitest with jsdom and Testing Library, 74 tests in 12 files. The pure domain modules are covered exhaustively because they hold the logic a reviewer would most want to trust (overlap edge cases such as touching intervals, AND-search tokens, clamping in the timetable, a `Day` guard that rejects inherited keys like `"toString"`). The reducer and provider tests pin the one-section-per-course rule, localStorage persistence and referential stability of the context value. The API tests use a mocked `fetch` and fake timers to cover HTTP errors, bad payloads, the mock error switch and abort during the delay. `App.test.tsx` drives the real component tree with a mocked API through the user journeys: load, search, add, switch, conflict, clear, error/retry, where focus lands after each action, the empty state during the debounce window, and a stale stored selection that clashes. I did not add browser end-to-end tests; the jsdom suite already exercises the same DOM, and a Playwright layer would double the setup for one page.
+**Testing.** Vitest with jsdom and Testing Library, 70 tests in 12 files. The pure domain modules are covered exhaustively because they hold the logic a reviewer would most want to trust (overlap edge cases such as touching intervals, AND-search tokens, clamping in the timetable, a `Day` guard that rejects inherited keys like `"toString"`). Tests only import what the app itself imports: helpers such as `slotsOverlap` and the `localStorage` key stay private to their modules and are exercised through `describeConflicts`, `describeSchedule`, `filterCourses` and the storage functions, so a module's export list is exactly its interface. The reducer and provider tests pin the one-section-per-course rule, localStorage persistence and referential stability of the context value. The API tests use a mocked `fetch` and fake timers to cover HTTP errors, bad payloads, the mock error switch and abort during the delay. `App.test.tsx` drives the real component tree with a mocked API through the user journeys: load, search, add, switch, conflict, clear, error/retry, where focus lands after each action, the empty state during the debounce window, and a stale stored selection that clashes. I did not add browser end-to-end tests; the jsdom suite already exercises the same DOM, and a Playwright layer would double the setup for one page.
 
 ## Known limitations and what I would do next
 
