@@ -1,6 +1,6 @@
 # LSCS Class Scheduler
 
-A small class-scheduling web app for the LSCS Frontend Engineering take-home. Students browse a course catalogue, search and filter it, add one section per course to a personal schedule, swap or remove sections, and see the result as a Monday-to-Saturday timetable. The catalogue is mock data served as a static JSON file behind a thin API module, so a real backend can be plugged in by setting one environment variable. There is no hosted deployment; the app runs locally with the commands below.
+A small class-scheduling web app for the LSCS Frontend Engineering take-home. Students browse a course catalogue, search and filter it, add one section per course to a personal schedule, swap or remove sections, and see the result as a Monday-to-Saturday timetable. The catalogue is mock data served as a static JSON file behind a thin API module, so a real backend can be plugged in by setting one environment variable. Source: [github.com/Enzo-user/lscs-class-scheduler](https://github.com/Enzo-user/lscs-class-scheduler). There is no hosted deployment; the app runs locally with the commands below.
 
 ## Features
 
@@ -25,13 +25,11 @@ Extensions I implemented because they were small and made the required features 
 Prerequisites: Node 22 or newer and npm.
 
 ```bash
-git clone <repository-url> lscs-class-scheduler
+git clone https://github.com/Enzo-user/lscs-class-scheduler.git
 cd lscs-class-scheduler
 npm install
 npm run dev        # http://localhost:5173
 ```
-
-`<repository-url>` is the link in the submission email; the second `git clone` argument only fixes the folder name.
 
 Other scripts:
 
