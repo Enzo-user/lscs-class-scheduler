@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { makeCourse, makeSection, slot } from '../test/fixtures'
-import { buildSearchIndex, filterCourses, normalize, tokenize, type FilterState } from './filter'
+import { buildSearchIndex, filterCourses, type FilterState } from './filter'
 
 const EMPTY_FILTERS: FilterState = { query: '', days: [], units: null }
 
@@ -50,14 +50,6 @@ const index = buildSearchIndex(catalogue)
 const ids = (result: ReturnType<typeof filterCourses>) =>
   result.map((r) => `${r.course.id}:${r.sections.map((s) => s.section).join(',')}`)
 
-describe('normalize and tokenize', () => {
-  it('lowercases and collapses whitespace', () => {
-    expect(normalize('  Object   Oriented ')).toBe('object oriented')
-    expect(tokenize('  CCPROG3   santos ')).toEqual(['ccprog3', 'santos'])
-    expect(tokenize('')).toEqual([])
-  })
-})
-
 describe('filterCourses', () => {
   it('returns everything when no filter is set', () => {
     expect(ids(filterCourses(index, EMPTY_FILTERS))).toEqual([
@@ -65,6 +57,15 @@ describe('filterCourses', () => {
       'CCDSTRU:S11',
       'LBYARCH:S11',
     ])
+  })
+
+  it('ignores case and stray whitespace in the query', () => {
+    expect(ids(filterCourses(index, { ...EMPTY_FILTERS, query: '  Object   ORIENTED ' }))).toEqual([
+      'CCPROG3:S11,S12',
+    ])
+    expect(ids(filterCourses(index, { ...EMPTY_FILTERS, query: '   ' }))).toEqual(
+      ids(filterCourses(index, EMPTY_FILTERS)),
+    )
   })
 
   it('matches code, title, instructor and section code, case-insensitively', () => {

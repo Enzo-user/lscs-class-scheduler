@@ -30,12 +30,12 @@ export interface FilteredCourse {
 }
 
 /** Lowercases and collapses whitespace so comparisons are case- and spacing-insensitive. */
-export function normalize(text: string): string {
+function normalize(text: string): string {
   return text.toLowerCase().trim().replace(/\s+/g, ' ')
 }
 
 /** Splits a query into normalised, non-empty tokens. */
-export function tokenize(query: string): string[] {
+function tokenize(query: string): string[] {
   return normalize(query).split(' ').filter(Boolean)
 }
 
