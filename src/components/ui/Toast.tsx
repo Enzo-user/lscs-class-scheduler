@@ -8,13 +8,15 @@ export interface ToastProps {
  * Feedback for add/remove actions. The live region is always mounted so
  * screen readers pick up changes; the message is keyed by id so repeating
  * the same text is still announced (the node is replaced, not reused).
+ * Bottom-centre on phones; from `lg` it sits bottom-left, under the course
+ * list, so it never covers the schedule pane's totals and buttons.
  */
 export function Toast({ toast }: ToastProps) {
   return (
     <div
       role="status"
       aria-live="polite"
-      className="pointer-events-none fixed inset-x-0 bottom-4 z-50 flex justify-center px-4"
+      className="pointer-events-none fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 lg:justify-start lg:px-6"
     >
       {toast && (
         <p

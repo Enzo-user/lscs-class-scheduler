@@ -64,6 +64,22 @@ VITE_API_BASE_URL=https://api.example.edu/v1 npm run build
 
 `src/api/coursesApi.ts` is the only file that knows the URL; the path constant `COURSES_PATH` is a one-line change if the endpoint has a different name.
 
+## What to try
+
+A short tour that exercises every item in the brief, in order. The names come from `public/data/courses.json`; I walked through these steps in a browser before submitting, and the Vitest suite drives the same journeys against a small fixture catalogue.
+
+1. **Load.** Open http://localhost:5173. Skeleton cards show for about half a second, then the list reads "Showing 34 of 34 courses" and the header reads "0 courses · 0 units".
+2. **Search.** Type `prog` in the search box: "Showing 3 of 34 courses" (CCPROG1, CCPROG2, CCPROG3), and because there are only a few results their section lists open on their own. Press the Clear button inside the box.
+3. **Filter.** Click the **Sat** chip: "Showing 23 of 34 courses". Now choose **1** in the Units dropdown: only LBYCPEI is left and its card says "2 sections · 1 matching", because only its Y01 section meets on Saturday. Set Units back to Any and click Sat again to clear the filters.
+4. **Add a section.** Search `CCPROG1` and press **Add** on S11 (Katrina Ocampo, Wed/Sat 12:45–2:15 PM, Y602). A toast says "Added CCPROG1 S11", the card gets a "✓ S11 added" badge, the header reads "1 course · 3 units" and two blocks appear in the timetable, on Wed and Sat.
+5. **Change the section.** In the same card press **Switch to this section** on S12 (Ramon Reyes, Tue/Fri 4:15–5:45 PM). The toast says "Switched CCPROG1 S12", the badge now says S12 and the blocks move to Tue and Fri; the header still counts one course.
+6. **Conflict.** Search `CCDSTRU`. Its S12 also meets Tue/Fri 4:15–5:45 PM, so that row says "⚠ Conflicts with CCPROG1 S12" and its Add button is dimmed and does nothing. Press **Add** on S11 (Mon/Thu 7:30–9:00 AM) instead: "2 courses · 6 units".
+7. **Remove from the schedule.** On desktop the "Selected sections" list sits under the timetable in the right pane; the "Selected sections (2) ↓" link beside the timetable heading scrolls to it. Press **Remove** next to CCDSTRU S11: toast "Removed CCDSTRU", header "1 course · 3 units", and the CCDSTRU card loses its badge.
+8. **Persistence.** Reload the page. CCPROG1 S12 is still on the schedule; the selection is kept in `localStorage`.
+9. **Clear all.** Press **Clear all** above the list. It turns into **Yes, clear all** with a Cancel button beside it; Cancel puts it back, Yes, clear all empties the schedule ("No sections yet", "0 courses · 0 units").
+10. **Phone width.** Narrow the window below 1024 px (or pick a 390 px device in the browser's device toolbar). A **Browse | My schedule (n)** switch sticks to the top; My schedule shows the list first and the timetable under it, and the timetable scrolls sideways inside its own box while the page does not.
+11. **Loading and error states.** Open http://localhost:5173/?mockError=1: the skeletons show, then a "Could not load courses" panel with a Retry button. Retry fails again while the parameter is present; remove `?mockError=1` from the address bar and press Enter, and the catalogue loads. Details are in "Seeing the loading and error states" above.
+
 ## Project structure
 
 ```
